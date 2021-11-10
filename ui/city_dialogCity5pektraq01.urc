@@ -1,0 +1,97 @@
+menu "city_dialogCity5pektraq01" 480 128 NONE 0.1
+align  top left 
+bgcolor 0 0 0 0
+borderstyle NONE
+noresize
+depth 0.25
+
+resource
+Widget
+{
+name "coop_comm-bkg"
+rect 0 0 128 128
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "none"
+ordernumber 0
+shader comm-bkg
+}
+
+// resource
+// dialoghead
+// {
+// name ""coop_dialogHeadConsole"
+// fgcolor 1.00 1.00 1.00 1.00
+// bgcolor 1.00 1.00 1.00 0.00
+// rect 12 10 102 106
+// borderstyle "none"
+// ordernumber 1
+// }
+
+
+resource
+Widget
+{
+name "coop_comm-frame"
+rect 0 0 128 128
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "none"
+ordernumber 3
+shader comm-frame
+}
+
+resource
+Widget
+{
+name "coop_comm-head"
+rect 0 0 128 128
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "none"
+ordernumber 3
+shader coop_hud_head_avakstas
+}
+
+
+
+resource
+Widget
+{
+name "coop_comm-frame"
+rect 0 0 128 128
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "none"
+ordernumber 3
+shader comm-frame
+}
+
+
+resource 
+RenderModel
+{
+    name "Default"
+    //rect 423 123 123 240
+    rect 12 10 102 106
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.00 0.00 0.00 0.75
+    borderstyle "NONE"
+    bordercolor 1.0 1.0 1.0 1.0
+    
+    linkcvar "mp_playermodel"
+    
+    rendermodelangles "0 175 0"
+    rendermodeloffset "160 0 -85"
+    rendermodelrotateoffset "0 0 35"
+    
+    //rendermodelscale 0.75
+    rendermodelfov 20 40
+    rendermodelanimation "dm_idle"
+    
+    borderstyle	"OUTLINE_BORDER"
+    bordercolor	0.125 0.157 0.251 1.000
+}
+
+
+end.

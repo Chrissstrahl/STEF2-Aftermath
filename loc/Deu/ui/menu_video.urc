@@ -1,0 +1,693 @@
+menu "video" 640 480 NONE 0
+bgcolor 0 0 0 0.8
+borderstyle NONE
+//fullscreen 1
+depth 0.2
+
+//include "loc/Deu/ui/background.inc"
+
+
+
+resource 
+Label
+{
+    title "$$VideoSettings$$"
+	name "VideoBackground"
+	rect 157 87 326 16
+	fgcolor 1.000 1.000 1.000 1.000
+	bgcolor 0.278 0.365 0.510 1.000
+	font serpentinemedium-10
+	borderstyle "3D_BORDER"
+
+}
+
+
+resource
+Widget
+{
+	name "VideoBackground"
+	rect 157 103 326 105
+	fgcolor 1 1 1 1
+	bgcolor 0.000 0.000 0.000 0.75
+	borderstyle "OUTLINE_BORDER"
+	borderwidth 1
+	bordercolor 0.278 0.365 0.510 1.000
+}
+
+resource 
+Label
+{
+    title "$$GammaCorrections$$"
+	name "VideoBackground"
+	rect 157 212 326 16
+	fgcolor 1.000 1.000 1.000 1.000
+	bgcolor 0.278 0.365 0.510 1.000
+	font serpentinemedium-10
+	borderstyle "3D_BORDER"
+
+}
+
+resource
+Widget
+{
+	name "VideoBackground2"
+	rect 157 228 326 105
+	fgcolor 1 1 1 1
+	bgcolor 0.000 0.000 0.000 0.75
+	borderstyle "OUTLINE_BORDER"
+	borderwidth 1
+	bordercolor 0.278 0.365 0.510 1.000
+}
+
+resource
+Label
+{
+    name "tooltip_video"
+    rect 49 403 320 26
+    fgcolor 1 1 1 1
+    bgcolor 0 0 0 0
+    font tahoma-8
+    
+    verticaljustify top
+    horizontaljustify left
+}
+
+resource
+Button
+{
+title "$$Controls$$"
+name "Default"
+rect 44 55 138 32
+fgcolor 0.12 0.15 0.25 1.00
+bgcolor 1.00 1.00 1.00 0.00
+
+borderstyle "none"
+
+font serpentinemedium-12
+horizontaljustify center
+verticaljustify center
+
+hovershader menu/generic/button-hover
+pressedshader menu/generic/button-press
+hovercommand "globalwidgetcommand tooltip_video title \"$$ChangeKeyboardSettings$$\""
+hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+
+stuffcommand "transitionmenu controls 0"
+
+hoversound sound/misc/menu/hover.wav
+clicksound sound/misc/menu/click.wav
+}
+
+resource
+Button
+{
+title "$$Video$$"
+name "Default"
+rect 182 55 138 32
+//fgcolor 0.12 0.15 0.25 1.00
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "none"
+
+font serpentinemedium-12
+horizontaljustify center
+verticaljustify center
+
+//hovershader menu/generic/button-hover
+//pressedshader menu/generic/button-press
+//hovercommand "globalwidgetcommand tooltip_video title \"$$ChangeVideoSettings$$\""
+//hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+
+//stuffcommand "transitionmenu  video 0"
+
+//hoversound sound/misc/menu/hover.wav
+//clicksound sound/misc/menu/click.wav
+}
+
+resource
+Button
+{
+title "$$Audio$$"
+name "Default"
+rect 320 55 138 32
+fgcolor 0.12 0.15 0.25 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "none"
+
+
+font serpentinemedium-12
+horizontaljustify center
+verticaljustify center
+
+hovershader menu/generic/button-hover
+pressedshader menu/generic/button-press
+hovercommand "globalwidgetcommand tooltip_video title \"$$ChangeAudioSettings$$\""
+hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+
+stuffcommand "transitionmenu  audio 0"
+
+hoversound sound/misc/menu/hover.wav
+clicksound sound/misc/menu/click.wav
+
+}
+
+resource
+Button
+{
+title "$$GameOptions$$"
+name "Default"
+rect 458 55 138 32
+fgcolor 0.12 0.15 0.25 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "none"
+
+font serpentinemedium-12
+horizontaljustify center
+verticaljustify center
+
+hovershader menu/generic/button-hover
+pressedshader menu/generic/button-press
+hovercommand "globalwidgetcommand tooltip_video title \"$$ChangeGameSettings$$\""
+hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+
+stuffcommand "transitionmenu  gameoptions 0"
+
+hoversound sound/misc/menu/hover.wav
+clicksound sound/misc/menu/click.wav
+
+}
+
+resource
+Button
+{
+	title "$$Apply$$"
+	name 	"Default"
+	rect 	 424 401 123 26
+	font serpentinemedium-12
+	fgcolor 		1.000 1.000 1.000 1.000
+	bgcolor 		0.000 0.000 0.000 0.000
+
+	hovershader menu/generic/button-hover
+	pressedshader menu/generic/button-press
+
+	//borderstyle "BORDER_OUTLINE"
+	//borderwidth 1
+	//bordercolor 0.12 0.15 0.25 1.00
+
+    stuffcommand "ui_checkrestart"
+    
+    hovercommand "globalwidgetcommand tooltip_video title \"$$ApplyCurrentChangesToVideo$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+}
+
+resource
+Button
+{
+    title "$$MainMenu$$"
+    name "Default"
+    rect 435 428 96 32
+    fgcolor 0.12 0.15 0.25 1.00
+    bgcolor 1.00 1.00 1.00 0.00
+    borderstyle "None"
+    stuffcommand "popmenu 0"
+    font serpentinemedium-12
+    hovershader menu/generic/button-hover
+    pressedshader menu/generic/button-press
+    hovercommand "globalwidgetcommand tooltip_video title \"$$ReturnToMainMenu$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+    
+    clicksound sound/misc/menu/back1.wav
+
+}
+
+
+//resource
+//Label
+//{
+//name "Default"
+//rect 32 43 256 256
+//fgcolor 1.00 1.00 1.00 1.00
+//bgcolor 1.00 1.00 1.00 0.00
+//borderstyle "NONE"
+//shader "textures/menu/video_1"
+//}
+
+
+resource
+Label
+{
+title "$$Hidden$$"
+name "Default"
+rect 289 446 59 24
+fgcolor 0.00 0.00 0.00 0.00
+bgcolor 0.50 0.50 0.50 0.00
+borderstyle "RAISED"
+linkcvar "r_mode"
+font serpentinemedium-10
+horizontaljustify left
+}
+
+
+//Video Mode Label
+resource
+Label
+{
+    title "$$VideoMode$$"
+    name "Default"
+    rect 162 108 156 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.122 0.157 0.251 1.000
+    borderstyle "3D_BORDER"
+    font serpentinemedium-10
+    horizontaljustify right
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetVideoResolution$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+}
+
+//Video Mode Display
+resource
+SwitchBox
+{
+    name "Default"
+    rect 322 108 140 16
+    fgcolor 0.953 0.667 0.271 1.000
+    bgcolor 0.000 0.000 0.000 0.750
+    borderstyle "OUTLINE_BORDER"
+    bordercolor 0.122 0.157 0.251 1.000
+    
+    linkcvar "r_mode"
+
+    option "640 x 480"      "set r_mode 3" 3
+    option "800 x 600"      "set r_mode 4" 4
+    option "1024 x 768"     "set r_mode 6" 6
+    option "1152 x 864"     "set r_mode 7" 7
+    option "1280 x 1024"    "set r_mode 8" 8
+    option "1600 x 1200"    "set r_mode 9" 9
+    
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetVideoResolution$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+}
+
+//Video Mode Pull Down Menu
+resource
+PulldownMenuContainer
+{
+    name "reslist"
+    rect 462 108 16 16
+    fgcolor                 0.953 0.667 0.271 1.000
+    bgcolor                 1.000 1.000 1.000 0.000
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    font serpentinemedium-10
+    
+    borderstyle "NONE"
+    menushader "MENU" "textures/menu/pulldownarrow"
+    selmenushader "MENU" "textures/menu/pulldownarrow_sel"
+
+    addpopup "MENU" "640 x 480"     command "set r_mode 3"
+    addpopup "MENU" "800 x 600"     command "set r_mode 4"
+    addpopup "MENU" "1024 x 768"    command "set r_mode 6"
+    addpopup "MENU" "1152 x 864"    command "set r_mode 7"
+    addpopup "MENU" "1280 x 1024"   command "set r_mode 8"
+    addpopup "MENU" "1600 x 1200"   command "set r_mode 9"
+    popup_width "MENU" 160
+    
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetVideoResolution$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+}
+
+// Color Depth Label
+resource 
+Label
+{
+    title "$$ColorDepth$$"
+    name "Default"
+    rect 162 128 156 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.122 0.157 0.251 1.000
+    borderstyle "3D_BORDER"
+    font serpentinemedium-10
+    horizontaljustify right
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetColorDepth$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+}
+
+//Color Depth Drop Down
+resource
+SwitchBox
+{
+    name "Default"
+    rect 322 128 140 16
+    fgcolor 0.953 0.667 0.271 1.000
+    bgcolor 0.000 0.000 0.000 0.750
+    borderstyle "OUTLINE_BORDER"
+    bordercolor 0.122 0.157 0.251 1.000
+    
+    linkcvar "r_texturebits"
+    
+    option "$$Default$$"    "set r_texturebits 0"   0
+    option "$$16Bit$$"      "set r_texturebits 16" 16
+    option "$$32Bit$$"      "set r_texturebits 32" 32
+    
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetColorDepth$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+}
+
+//Color Depth Container.
+resource
+PulldownMenuContainer
+{
+    name "colorlist"
+    rect 462 128 16 16
+    fgcolor                 0.953 0.667 0.271 1.000
+    bgcolor                 1.000 1.000 1.000 0.000
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    borderstyle "NONE"
+    
+    menushader "MENU" "textures/menu/pulldownarrow"
+    selmenushader "MENU" "textures/menu/pulldownarrow_sel"
+    
+    addpopup "MENU" "$$Default$$"   command "set r_texturebits 0"
+    addpopup "MENU" "$$16Bit$$"     command "set r_texturebits 16"
+    addpopup "MENU" "$$32Bit$$"     command "set r_texturebits 32"
+    popup_width "MENU" 144
+    
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetColorDepth$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+}
+
+
+//Texture Detail Label
+resource 
+Label
+{
+    title "$$TextureQuality$$"
+    name	"Default"
+    rect 162 148 156 16 
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.122 0.157 0.251 1.000
+    borderstyle "3D_BORDER"
+    font serpentinemedium-10
+    horizontaljustify right
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetTextureDetail$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+}
+
+//Texture Detail Display
+resource
+SwitchBox
+{
+    name "Default"
+    rect 322 148 140 16
+    fgcolor 0.953 0.667 0.271 1.000
+    bgcolor 0.000 0.000 0.000 0.750
+    borderstyle "OUTLINE_BORDER"
+    bordercolor 0.122 0.157 0.251 1.000
+    
+    linkcvar "r_picmip"
+    
+    option "$$Low$$"        "set r_picmip 2" 2
+    option "$$Medium$$"     "set r_picmip 1" 1
+    option "$$High$$"       "set r_picmip 0" 0
+
+    font serpentinemedium-10
+    
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetTextureDetail$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+}
+
+
+//Texture Detail Container
+resource
+PulldownMenuContainer
+{
+    name "Default"
+    rect 462 148 16 16
+    fgcolor                 0.953 0.667 0.271 1.000
+    bgcolor                 1.000 1.000 1.000 0.000
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    borderstyle "NONE"
+    
+    menushader "MENU" "textures/menu/pulldownarrow"
+    selmenushader "MENU" "textures/menu/pulldownarrow_sel"
+    
+    addpopup "MENU" "$$Low$$" command "set r_picmip 2"
+    addpopup "MENU" "$$Medium$$" command "set r_picmip 1"
+    addpopup "MENU" "$$High$$" command "set r_picmip 0"
+    popup_width "MENU" 144
+    
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetTextureDetail$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+}
+
+
+
+//Texture Filtering
+resource 
+Label
+{
+    title "$$TextureFilter$$"
+    name	"Default"
+    rect 162 168 156 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.122 0.157 0.251 1.000
+    borderstyle "3D_BORDER"
+    font serpentinemedium-10
+    
+    horizontaljustify right
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetTextureFilter$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+}
+
+resource
+SwitchBox
+{
+    name "Default"
+    rect 322 168 140 16
+    fgcolor 0.953 0.667 0.271 1.000
+    bgcolor 0.000 0.000 0.000 0.750
+    borderstyle "OUTLINE_BORDER"
+    bordercolor 0.122 0.157 0.251 1.000
+    
+    linkcvar "r_texturemode"
+    
+    option "$$Bilinear$$"   "set r_texturemode gl_linear_mipmap_nearest" gl_linear_mipmap_nearest
+    option "$$Trilinear$$"  "set r_texturemode gl_linear_mipmap_linear" gl_linear_mipmap_linear
+
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetTextureFilter$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+
+}
+
+resource
+PulldownMenuContainer
+{
+    name "Default"
+    rect 462 168 16 16
+    fgcolor                 0.953 0.667 0.271 1.000
+    bgcolor                 1.000 1.000 1.000 0.000
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+    
+    menushader "MENU" "textures/menu/pulldownarrow"
+    selmenushader "MENU" "textures/menu/pulldownarrow_sel"
+    
+    addpopup "MENU" "$$Bilinear$$"  command "set r_texturemode gl_linear_mipmap_nearest"
+    addpopup "MENU" "$$Trilinear$$" command "set r_texturemode gl_linear_mipmap_linear"
+    
+    popup_width "MENU" 144
+    
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_video title \"$$SetTextureFilter$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+
+}
+
+//Brightness
+resource 
+Label
+{
+title "$$Brightness$$"
+name	"Default"
+rect 162 233 156 16
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.122 0.157 0.251 1.000
+borderstyle "3D_BORDER"
+font serpentinemedium-10
+horizontaljustify right
+hovercommand "globalwidgetcommand tooltip_video title \"$$SetBrightness$$\""
+hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+}
+
+//Brightness
+resource 
+widget
+{
+name	"Default"
+rect 162 253 316 48
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+
+shader "sysimg/menu/calibration.tga"
+}
+
+//Brightness
+resource 
+Label
+{
+name	"Default"
+title "$$AllShadesShouldBeDistinct$$"
+rect 162 253 316 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+
+font serpentinelight-10
+
+horizontaljustify left
+verticaljustify center
+}
+
+resource
+Slider
+{
+name "Default"
+rect 322 233 156 16
+fgcolor 0.953 0.667 0.271 1.000
+bgcolor 0.000 0.000 0.000 0.750
+borderstyle "OUTLINE_BORDER"
+bordercolor 0.122 0.157 0.251 1.000
+linkcvar "r_gamma"
+slidertype float
+setrange 0.5 3
+stepsize 0.1
+hovercommand "globalwidgetcommand tooltip_video title \"$$SetBrightness$$\""
+hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+clicksound sound/misc/menu/click.wav
+}
+
+//resource
+//Label
+//{
+//name "Default"
+//rect 242 235 64 64
+//fgcolor 1.00 1.00 1.00 1.00
+//bgcolor 0 0 0 0 
+//borderstyle "NONE"
+//shader "textures/menu/gamma_test"
+//font serpentinemedium-10
+//hovercommand "globalwidgetcommand tooltip_video title \"$$SetBrightness$$\""
+//hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+//}
+
+//resource
+//Label
+//{
+//title "$$BrightnessTest$$"
+//name "Default"
+//rect 316 235 150 64
+//fgcolor 1.00 1.00 1.00 1.00
+//bgcolor 0 0 0 0.0
+//borderstyle "NONE"
+//font serpentinemedium-10
+//hovercommand "globalwidgetcommand tooltip_video title \"$$SetBrightness$$\""
+//hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+//}
+
+
+
+resource
+CheckBox
+{
+title "$$FullScreen$$"
+name "Default"
+rect 162 188 120 16
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.50 0.00
+
+shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+
+borderstyle "NONE"
+linkcvar "r_fullscreen"
+horizontaljustify left
+checked_shader "textures/menu/checkbox_checked"
+unchecked_shader "textures/menu/checkbox_unchecked"
+hovershader menu/generic/button-hover
+armedshader menu/generic/button-press
+font serpentinemedium-10
+hovercommand "globalwidgetcommand tooltip_video title \"$$SetFullScreen$$\""
+hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+
+clicksound sound/misc/menu/click.wav
+
+}
+
+
+
+
+//Advanced Video
+resource
+Button
+{
+title "$$Advanced$$"
+name "Default"
+rect 420 375 128 32
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "NONE"
+stuffcommand "showmenu promptadvancedvideo\n"
+//shader "textures/menu/B_apply"
+//hovershader "textures/menu/B_apply_selected"
+//clicksound sound/misc/menu/select.wav
+ordernumber 1
+font serpentinemedium-10
+hovershader menu/generic/button-hover
+pressedshader menu/generic/button-press
+hovercommand "globalwidgetcommand tooltip_video title \"$$AdvancedVideoSettings$$\""
+hoverexitcommand "globalwidgetcommand tooltip_video title \"\""
+
+clicksound sound/misc/menu/click.wav
+
+}
+
+end.

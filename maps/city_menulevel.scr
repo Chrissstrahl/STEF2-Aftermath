@@ -1,0 +1,71 @@
+void main();
+
+void main()
+{
+	$guard1.settendency("patrol",1);
+	$guard1.visiondistance(1);
+	
+	cam_fadeout( 2, 0, 0, 0, 1, 0 );
+	spawn("camera","targetname","cam1");
+
+	if(getCvarInt("g_gametype") != 1)
+	{
+		stuffCmd("ui_showmouse");
+		waitForPlayer();
+		cinematic();
+		freezeplayer();
+		$player.hide();
+		$player.solid();
+		letterbox(0.1);
+		wait(1.25);
+	//make cam follow the given path entity
+		$cam1.follow($cin_start);
+	//transition to camera: cut, no transition
+		$cam1.cut();
+	//wait for the camera to get started moving along the path
+		wait(0.1);
+	//switch from player to given camera entity now
+		cuecamera($cam1);
+		cam_fadein( 2, 0, 0, 0, 1, 0 );
+		stuffCMD("pushmenu city_main\n");
+	}
+	
+	// while(1)
+	// {
+	 // wait(5);
+	 // $guard1.whatareyoudoing();
+	// }
+}
+
+void underwater()
+{
+	wait(0.5);
+	stuffCMD("seta city_ui_underwater 1\n");
+}
+void onlandagain()
+{
+	wait(0.8);
+	stuffCMD("seta city_ui_underwater 0\n");
+}
+
+void triggerFF()
+{
+	$t7.open($world);
+	triggerEntity($t7b);
+}
+
+void rockDust()
+{
+	triggerEntity($spawnRomulanRockEffect);
+}
+
+void rockDust2()
+{
+	triggerEntity($spawnRomulanRockEffect0);
+}
+
+void waterImpact()
+{
+	//triggerEntity($spawnWaterEffect);
+}
+

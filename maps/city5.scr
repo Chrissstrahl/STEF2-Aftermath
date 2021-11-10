@@ -1,0 +1,637 @@
+void main();
+void setupAi();
+void transporterRoom();
+void chellOnUse();
+void failed1();
+void puzzle_solved();
+void fixed_transporter();
+void unlock_liftdoor();
+void player_detected();
+
+#include "maps/global_scripts/global_common.scr" 
+#include "maps/global_scripts/global_debugUtils.scr" 
+#include "maps/global_scripts/global_tricorderBase.scr" 
+#include "maps/global_scripts/global_tricorderRoute.scr" 
+#include "maps/global_scripts/global_tricorderMod.scr" 
+#include "maps/global_scripts/global_tricorderKeypad.scr"
+
+float	fTransporterEnabled;
+
+void main()
+{
+	cam_fadeout(0.1,0,0,0,1);
+	soundtrack( "music/m10l1-romulan_installation.mus" );
+//setup flickering light (dynamic light)
+	//0 means repat it(required for mp to work)
+	$world.light_lightstyle("pit_flickeringLight","zaaazzzzzzzggggzzaaaaaaaaaaaaaaaaaaaaaaaaazzzzzzzzzggggggggggggggzzzzz",0);
+	$world.light_intensity("valve_bad_light",0);
+	$modulateSymbol.hide();
+	$bad_valve_symbol.hide();
+	
+	thread setupAi();
+//wait for the player to spawn
+	waitForPlayer();
+//clear/set viewmodes avialbe for Tricorder
+	$world.clearAvailableViewModes();
+	$chang.ai_off();
+	$player.hide();
+	$startguard.health(1);	
+	$startmunro.notsolid();
+	$korban.ai_off();
+	$startguard.ai_off();
+	$munro.hide();
+	$startmunro.ai_off();
+	$startmunro.pushable(0);
+	$korban.pushable(0);
+	$chang.pushable(0);
+	spawn("camera","targetname","cam2");
+//give weapons from previouse level, in case player loads city5 as standalone
+	$player.give("models/weapons/worldmodel-compressionrifle.tik");
+	$player.give("models/weapons/worldmodel-sniperrifle.tik");
+	$player.give("models/weapons/worldmodel-tricorder-stx.tik");
+	$player.give("models/weapons/worldmodel-phaser-stx.tik");
+//load objectives, then inizial
+	if(getCvarInt("g_gametype") != 1)
+	{
+		$player.loadobjectives( "city5" );
+		wait( .1 );
+		$player.setobjectiveshow( "c5TryTrackSpy", 1 );
+		$player.setobjectiveshow( "c5FixTrans", 1 );
+		$player.setobjectiveshow( "c5AvoidDetect", 1 );
+	}
+	//wait for player to spawn(sp) or for any player to join the server (mp)
+	waitforplayer();
+
+//wait a moment for the camera to spawn
+	wait(1);
+	$startguard.angle(0);		
+	
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+		$player.hide();
+		$player.notsolid();
+		
+		$cam2.follow($intro2);
+		$cam2.cut();//not found
+	//make camera zoom
+		wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+		cuecamera($cam2);//camera now ready to be accessed, now getting camera from teh location it spawned at
+	}
+	
+//wait for the camera to move in to position
+	wait(0.1);
+	
+//fade in cam
+	$startguard.anim("ent-curvedconsole-gesture2");
+	$startguard.angle(180);
+	$startguard.settendency("work",1);
+	cam_fadeIn(0.25,0,0,0,1);
+	wait(0.5);
+	$spyintro.displayeffect("TransportOut","Romulan");
+	wait(2);
+	$spyintro.remove();
+	wait(1);
+	//CUT
+	$cam2.follow($introcinematic);
+	$cam2.cut();//not found
+	//make camera zoom
+	wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+	cuecamera($cam2);//camera now ready to be accessed, now getting camera from teh location it spawned at
+
+//wait for the screen to fade in a bit
+	wait(0.1);
+	$startmunro.walkto("munrohalt","walk");
+	$korban.walkto("korbanHalt0","walk");
+	$chang.walkto("changHalt0","walk");
+	$munro.show();
+	wait(2);
+
+	//$korban0.headwatch( $munro0, 70 ); //makes him turn, that looks stupid
+	wait(0.2);
+	
+	$startguard.playDialog("localization/sound/dialog/m2l2/romsold2_fed.mp3",2,128,0);
+
+	
+	//wait to simulate natural delay in munros reaction
+	wait(0.5);
+	$startguard.animateonce("180_turn");
+	$startguard.angle(180);
+	$startguard.anim("knife_combo2");
+	
+	//make munro seam to respond via bodylanguage
+	wait(1);
+	$startmunro.ai_on();
+	wait(1);
+	$startmunro.playDialog("localization/sound/dialog/m10l2/munro_yes.mp3",2,256,0);
+	$transportercontrol.selfdetonate();
+	$startmunro.ai_off();
+	$startguard.kill();		
+	//cut
+	$cam2.follow($intro2);
+	$cam2.cut();//not found
+	//make camera zoom
+	wait(0.1);
+	cuecamera($cam2);
+	$startmunro.walkto("panel","walk");
+	wait(2);
+	$startmunro.anim("ent-curvedconsole-gesture2");
+	$startmunro.playsound("sound/ships/romulan/rom_beep_no.wav",0,1,256);
+	wait(1);
+	$startmunro.PlayDialog("localization/sound/dialog/m8l2/munro_cancloak.mp3",1,2048);
+	wait(1);
+	//munro sais aye sir
+//fade out cam
+	cam_fadeOut(0.25,0,0,0,1);
+	wait(0.3);
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+		$player.show();
+		$player.solid();
+	}
+
+	$startmunro.hide();
+	cam_fadeIn(0.25,0,0,0,1);
+	$player.show();
+}
+
+
+void setupAi()
+//setup all NPCs that require us to do so
+{
+//do patrol if patrol path is near
+	$patrolman.settendency("patrol",1);
+//make vison ideal for the player to sneak by the romulan
+	$patrolman.fov(10);
+	$patrolman.visiondistance(128);
+//give slightly more health
+	$patrolman.health(60);
+	$munrostart.hide();
+//control room
+	$controlroom_stationary1.settendency("work",1);
+	$controlroom_stationary1.health(60);
+	$controlroom_stationary2.settendency("work",1);
+	$controlroom_stationary2.health(60);
+	$controlroom_stationary3.settendency("work",1);
+	$controlroom_stationary3.health(60);
+	$controlroom_dude.settendency("patrol",1);
+	$controlroom_dude.allowFall(1);
+}
+
+void transporterRoom()
+{
+//make security activate, don't know how to do the speaker thing so we'll add this later
+	wait(4.0);
+	$player.simplePlayDialog("localization/sound/dialog/m5l2/munro_takedown.mp3",1,128);
+	wait(2.0);
+	$chell.playDialog("localization/sound/dialog/m5l2/chell_try.mp3",2,128,0);
+	waitForDialog( $chell );
+	
+//Make chell useable for the player, call the given thread if the player press the use buton while close to chell
+	$chell.onUse("chellOnUse");
+	
+//turn chell gets to the console
+	$chell.ai_off();
+	$chell.pushable ( 0 );
+	$chell.warpto("$here");
+	$chell.anim( "tricorder_idle" );
+	waitforanimation ( $chell, "tricorder_idle" );
+	wait ( .2 );
+	$chell.anim( "tricorder_fire" );
+	wait(4.0);
+	$chell.playDialog("localization/sound/dialog/borg02/chell_degen.mp3",2,128,0);
+	waitForDialog( $chell );
+}
+
+void chellOnUse()
+{
+//Make him tell munro to use the console
+	$chell.playDialog("localization/sound/dialog/borg02/chell_munroneed.mp3",2,128,0);
+	waitForDialog( $chell );
+}
+
+void transport_puzzle()
+{
+	//secret door puzzle
+	globalTricorderKeypad_SetSecretCode( 5,4,3,2,1,0,0,0,0 ); 
+	globalTricorderKeypad_SetType( "romulan" ); 
+	globalTricorderKeypad_SetScannedCodeFlag(1); 
+	thread globalTricorderKeypad_Run( $transport_fix, 0, 3 ); 
+}
+
+void failed1()
+{
+//Make munro growl
+	wait(0.2);
+	$player.simplePlayDialog("localization/sound/dialog/combat/munro_attack1.mp3",1,128);
+}
+
+void puzzle_solved()
+{
+//door unlocks
+	$secretdoor.unlock();
+}
+
+
+void modulation_done()
+{
+//wait a little
+	wait(1.0);
+//Let chell talk
+	$chell.playdialog("localization/sound/dialog/combat/chell_closeone.mp3", 2, 1500,0);
+}
+
+void open_hatch()
+{
+	$modulateUseSymbol.remove();
+	$modulateSymbol.show();
+	$transport_fix.puzzleobject_activate();
+}
+
+void fixed_transporter()
+{
+
+	$modulateSymbol.remove();
+	fTransporterEnabled	= 1;
+	$player.setobjectivecomplete( "c5FixTrans", 1 );
+}
+
+void transporter_activate()
+{
+	if(fTransporterEnabled)
+	{
+		$transport.triggerable();
+		$transTrigger.remove();
+		$transSymbol.remove();
+		$player.playsound("sound/ships/romulan/rom_beep_yes.wav",0,1,256);
+			
+	//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+		$player.hide();
+		$player.notsolid();
+		
+		$cam2.follow($t83);
+		$cam2.cut();//not found
+	//make camera zoom
+		wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+		cuecamera($cam2);//camera now ready to be accessed, now getting camera from teh location it spawned at
+	}
+	
+	$startmunro.show();
+	$startmunro.PlayDialog("localization/sound/dialog/m7l1/munro_changsecure.mp3",1,128);	
+	$startmunro.anim("ent-curvedconsole-gesture2");
+	wait(4);
+	$chang.playDialog("localization/sound/dialog/combat/chang_yessir9.mp3",2,128,0);
+	wait(1);
+	
+	
+	//fade out cam
+	cam_fadeOut(0.25,0,0,0,1);
+	wait(0.3);
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+		$player.show();
+		$player.solid();
+	}
+
+	$startmunro.remove();
+	cam_fadeIn(0.25,0,0,0,1);
+	}
+	else
+	{
+		$player.playsound("sound/ships/romulan/rom_beep_no.wav",0,1,256);
+	}
+}
+
+void bigroom()
+//player observes room
+{
+	stuffCMD("ui_savegamewithname \"Outland - Underground Romulan Base\"");
+}
+
+void thelift()
+//using the lift
+{
+	$liftconsole.playsound("sound/ships/romulan/rom_beep_yes.wav",0,1,256);
+}
+
+void cinematic_thespy()
+//player observes room and sees spy run away
+{
+//fade screen black, this level starts with a cinematic
+	cam_fadeout(0.1,0,0,0,1);
+	
+//warp munro to area
+	$munro.ai_off();
+	$munro.pushable ( 0 );
+	
+//spawn camera entity
+	spawn("camera","targetname","cam1");
+	
+//wait for the camera entity to spawn and the cam to fade black 
+	wait(0.1);
+
+//do not do that in multiplayer, only singleplayer and solomatch
+//get the current game type from the config variables of game
+//0=sp,1=mp,2=solomatch
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+	//make cam follow the given path entity
+		$cam1.follow($cinematicsceneA);
+	//transition to camera: cut, no transition
+		$cam1.cut();
+	//wait for the camera to get started moving along the path
+		wait(0.1);
+	//switch from player to given camera entity now
+		cuecamera($cam1);
+	}
+	
+//position Munro
+	$munro.angle(180);
+	$munro.killattach();
+	$munro.show();
+	$munro.headwatch($controlroom_dude);
+	
+//fade screen from black back in again to normal
+	cam_fadeIn(0.25,0,0,0,1);
+	
+//activate the control room dude, he is set to patrol
+	$liftDoor.unlock();
+	$controlroom_dude.ai_on();
+	wait(6);
+	$controlroom_stationary1.ai_on();
+	$controlroom_stationary2.ai_on();
+	$controlroom_stationary3.ai_on();
+	$controlroom_stationary1.removeactorweapon("actorweapons/romulan-disruptor-rifle.tik");
+	$controlroom_stationary2.removeactorweapon("actorweapons/romulan-disruptor-rifle.tik");
+	$controlroom_stationary3.removeactorweapon("actorweapons/romulan-disruptor-rifle.tik");
+	$liftDoor.lock();
+//fade screen black
+	cam_fadeout(0.9,0,0,0,1);
+//wait until the camera has blacked out
+	wait(1);
+	$munro.anim("idle");
+	$munro.hide();
+//remove dude, move lift down
+	$controlroom_dude.remove();
+	if(doesEntityExist($lift))
+	{
+		triggerEntity($lift);
+	}
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+	}
+//wait until the players sees from his own location again
+	wait(0.05);
+//fade screen from black back in again to normal
+	cam_fadeIn(0.25,0,0,0,1);
+}
+
+void fixedlift()
+{
+	$liftpanel.triggerable();
+	$modulateSymbol2.remove();
+	$needToRestore.remove();
+	$player.setobjectiveshow( "c5RestoreLiftPower", 1 );
+	wait(0.1);
+	$player.setobjectivecomplete( "c5RestoreLiftPower", 1 );
+	$lift2Trigger.triggerable();
+}
+	
+void problem()
+{
+//fade screen black, this level starts with a cinematic
+	cam_fadeout(0.1,0,0,0,1);
+	
+//spawn camera entity, this level starts with a cinematic
+	spawn("camera","targetname","cam1");
+	
+//wait for the camera entity to spawn and the cam to fade black 
+	wait(0.1);
+    forcemusic ("aux2");
+//do not do that in multiplayer, only singleplayer and solomatch
+//get the current game type from the config variables of game
+//0=sp,1=mp,2=solomatch
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+	//make cam follow the given path entity
+		$cam1.follow($cinematic3);
+	//transition to camera: cut, no transition
+		$cam1.cut();
+	//wait for the camera to get started moving along the path
+		wait(0.1);
+	//switch from player to given camera entity now
+		cuecamera($cam1);
+	}
+//fade screen from black back in again to normal
+	cam_fadeIn(0.25,0,0,0,1);
+	$doorSpyFlee.open($spy);
+	
+	float fExplosion;
+	entity eExplosion;
+	for(fExplosion=0;fExplosion<5;fExplosion++)
+	{
+		eExplosion = getEntity("grateBlowExplosion"+fExplosion);
+		if(doesEntityExist(eExplosion))
+		{
+			eExplosion.selfdetonate();
+		}
+		wait(0.25);
+	}
+	float fGrate;
+	entity eGrate;
+	for(fGrate=0;fGrate<4;fGrate++)
+	{
+		eGrate = getEntity("grateBlow"+fGrate);
+		if(doesEntityExist(eGrate))
+		{
+			eGrate.moveDown(120);
+			eGrate.time(1);
+			eGrate.rotateX(10);
+		}
+	}
+	$spy.walkto("$spyFleeNode","walk");
+	wait(1);
+	for(fGrate=0;fGrate<4;fGrate++)
+	{
+		eGrate = getEntity("grateBlow"+fGrate);
+		if(doesEntityExist(eGrate))
+		{
+			eGrate.remove();
+		}
+	}
+	
+	
+//wait for the camera to get in position
+	wait(5);
+	$player.simplePlayDialog("localization/sound/dialog/m8l2/munro_cancloak.mp3",1,2048);
+	$spy.remove();
+//wait
+	wait(1);
+//fade screen black, this level starts with a cinematic
+	cam_fadeout(0.9,0,0,0,1);
+//wait until the camera has blacked out
+	wait(1.1);
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+	}
+//wait until the players sees from his own location again
+	wait(0.05);
+//fade screen from black back in again to normal
+	cam_fadeIn(0.25,0,0,0,1);
+}
+
+void munro_captured()
+{
+//immobilize player
+		$player.immobilize(1);
+		$player.nodamage();
+//wait for soldiers to spawn
+	wait(0.05);
+	//fade screen black, this level starts with a cinematic
+	cam_fadeout(0.1,0,0,0,1);
+	
+//spawn camera entity, this level starts with a cinematic
+	spawn("camera","targetname","cam1");
+	
+//wait for the camera entity to spawn and the cam to fade black 
+	wait(0.1);
+
+//do not do that in multiplayer, only singleplayer and solomatch
+//get the current game type from the config variables of game
+//0=sp,1=mp,2=solomatch
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+	//make cam follow the given path entity
+		$cam1.follow($uhoh);
+	//transition to camera: cut, no transition
+		$cam1.cut();
+	//wait for the camera to get started moving along the path
+		wait(0.1);
+	//switch from player to given camera entity now
+		cuecamera($cam1);
+	}
+//fade screen from black back in again to normal
+	cam_fadeIn(0.25,0,0,0,1);
+//do not allow the player to hurt/push her
+	$John.nodamage();
+	$John.mass(999999);
+	$John.pushable(0);
+//wait for the camera to get in position
+	wait(1.8);
+	//talk, Surrender!
+	$John.playdialog("localization/sound/dialog/m8l1/idryll_surrdie.mp3",1,256,0);
+	waitForDialog( $John );
+	//$John.attack($player);
+	
+	
+//exit here, map5b is not ready yet
+	stuffcmd("pushmenu city_info_moresoon\n");
+	$player.immobilize(1);
+	return;//exit from here
+	
+	wait(1.0);
+	$player.simplePlayDialog("localization/sound/dialog/combat/munro_longp.mp3",1,128);
+	wait(4.5);
+//wait
+	wait(1);
+//fade screen black, this level starts with a cinematic
+	cam_fadeout(0.9,0,0,0,1);
+//wait until the camera has blacked out
+	wait(1.1);
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+	}
+//wait until the players sees from his own location again
+	wait(0.05);
+//fade screen from black back in again to normal
+	cam_fadeIn(0.25,0,0,0,1);
+	
+		//do not show sucess hud
+	nointermission();
+
+//change to next level
+	stuffCMD("map city5b");
+}
+
+void unlock_liftdoor()
+{
+	$use1.remove();
+	$liftDoor.unlock();
+	$liftDoor.wait(-1);
+	$liftDoor.open($player);
+}
+
+
+void bad_valve()
+{
+	$bad_valve_symbol.show();
+	$world.light_intensity("valve_bad_light",1);
+}
+
+void flames_turnOff()
+{
+	$bad_valve_symbol.remove();
+	$bad_valve.rotateXdown(270);
+	$bad_valve.time(2);
+	wait(2);
+	$flameTrigger1.remove();
+	$flameTrigger2.remove();
+	$flameTrigger3.remove();
+	$flame1.remove();
+	$flame2.remove();
+	$flame3.remove();
+}
+
+void restoreLift()
+{
+	$player.setobjectiveshow( "c5RestoreLiftPower", 1 );
+}
+
+void player_detected()
+{
+	$player.setobjectivefailed( "c5AvoidDetect", 1 );
+}
+
+

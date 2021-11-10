@@ -1,0 +1,1123 @@
+menu "advancedvideo" 640 480 NONE 0
+bgcolor 0 0 0 0.8
+borderstyle NONE
+//fullscreen 1
+depth 0.2
+
+//include "loc/Deu/ui/background.inc"
+//pushcommand "menu_unlock\n"
+//showcommand "globalwidgetcommand okdialogtitle \"$$AdvancedVideoWarning$$\"\;showmenu okdialog\n"
+
+
+resource
+Label
+{
+    name "tooltip_videoadv"
+    rect 49 403 320 26
+    fgcolor 1 1 1 1
+    bgcolor 0 0 0 0
+    font tahoma-8
+    
+    verticaljustify top
+    horizontaljustify left
+ 
+}
+
+
+resource
+Label
+{
+title "$$AdvancedVideo$$"
+name "Default"
+rect 220 55 200 32
+fgcolor 0.12 0.15 0.25 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "none"
+ordernumber 3
+font serpentinemedium-12
+}
+
+
+resource
+Button
+{
+title "$$Back$$"
+name "Default"
+rect 435 428 96 32
+fgcolor 0.12 0.15 0.25 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "None"
+stuffcommand "popmenu 0"
+font serpentinemedium-12
+hovershader menu/generic/button-hover
+pressedshader menu/generic/button-press
+hovercommand "globalwidgetcommand tooltip_videoadv title \"$$ReturnToPreviousMenu$$\""
+hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+
+    clicksound sound/misc/menu/back1.wav
+
+}
+
+
+resource 
+Label
+{
+    title "$$GraphicsPerformance$$"
+	name "Default"
+	rect 34 87 215 16
+	fgcolor 1.000 1.000 1.000 1.000
+	bgcolor 0.278 0.365 0.510 1.000
+	font serpentinemedium-10
+	borderstyle "3D_BORDER"
+}
+
+resource
+Widget
+{
+	name "Default"
+	rect 34 103 214 144
+	fgcolor 1 1 1 1
+	bgcolor 0.000 0.000 0.000 0.75
+	borderstyle "OUTLINE_BORDER"
+	borderwidth 1
+	bordercolor 0.278 0.365 0.510 1.000
+}
+
+
+resource
+CheckBox
+{
+    title "$$OpenGLExtensions$$"
+    name "Default"
+    rect 38 107 210 16
+    
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.00 0.00 0.00 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+ 
+    linkcvar "r_allowextensions"
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+    
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+   
+ 
+    font serpentinemedium-10
+    horizontaljustify left
+        
+    hovercommand "globalwidgetcommand tooltip_videoadv title \$$EnableOpenGLExtensions$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+}
+
+
+resource
+CheckBox
+{
+    title "$$FullScreenAntialiasing$$"
+    name "Default"
+    rect 38 127 210 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.0 0.0 0.0 0.0
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    disabledfgcolor     0.5 0.5 0.5 0.5
+    //disabledbgcolor     0.5 0.0 0.5 0.5
+    disabledshadercolor 0.5 0.5 0.5 0.5
+    linkcvar "r_arb_multisample"
+    font serpentinemedium-10
+    horizontaljustify left
+    
+    cvarcheckdisable "r_allowExtensions" 0
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+    
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableFullScreenAntiAliasing$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+resource
+CheckBox
+{
+    title "$$NvidiaAntiAliasing$$"
+    name "Default"
+    rect 38 147 210 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 1.00 0.00 0.00 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    disabledfgcolor     0.5 0.5 0.5 0.5
+    //disabledbgcolor     0.5 0.0 0.5 0.5
+    disabledshadercolor 0.5 0.5 0.5 0.5
+ 
+    
+    linkcvar "r_ext_nv_multisample_filter"
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+    
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+
+    
+    font serpentinemedium-10
+    horizontaljustify left
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableNvidiaFullScreenAntialiasing$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    cvarcheckdisable "r_ext_nv_support_multisample" 0
+    cvarcheckdisable "r_arb_multisample" 0
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+resource
+CheckBox
+{
+    title "$$MonitorSync$$"
+    name "Default"
+    rect 38 167 210 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.00 0.00 0.00 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "3D_BORDER"
+    
+    linkcvar "r_swapinterval"
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+    
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+
+    font serpentinemedium-10
+    
+    horizontaljustify left
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableMonitorSync$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+
+resource
+CheckBox
+{
+    title "$$AnsitropicFiltering$$"
+    name "Default"
+    rect 38 187 210 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.00 0.00 0.00 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "3D_BORDER"
+    disabledfgcolor     0.5 0.5 0.5 0.5
+    //disabledbgcolor     0.5 0.0 0.5 0.5
+    disabledshadercolor 0.5 0.5 0.5 0.5
+    
+    linkcvar "r_anisotropicFiltering"
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+
+    font serpentinemedium-10
+    
+    horizontaljustify left
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableAnsitropicFiltering$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+
+    cvarcheckdisable "r_allowExtensions" 0
+}
+
+resource 
+Label
+{
+    title "$$LightingPerformance$$"
+	name "Default"
+	rect 251 87 350 16
+	fgcolor 1.000 1.000 1.000 1.000
+	bgcolor 0.278 0.365 0.510 1.000
+	font serpentinemedium-10
+	borderstyle "3D_BORDER"
+}
+
+resource
+Widget
+{
+	name "Default"
+	rect 251 103 349 144
+	fgcolor 1 1 1 1
+	bgcolor 0.000 0.000 0.000 0.75
+	borderstyle "OUTLINE_BORDER"
+	borderwidth 1
+	bordercolor 0.278 0.365 0.510 1.000
+}
+
+//Light Simple
+resource
+Checkbox
+{
+    title "$$SimpleLighting$$"
+    name "Default"
+    rect 255 107 232 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.50 0.50 0.50 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+
+    linkcvar r_light_simple
+    
+    font serpentinemedium-10
+    horizontaljustify left
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+    
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+
+
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SelectSimpleLightType$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+//Simple Light Distance
+resource
+Label
+{
+    title "$$SimpleLightingDistance$$"
+    name "Default"
+    rect 255 127 185 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.122 0.157 0.251 1.000
+    borderstyle "3D_BORDER"
+    font serpentinemedium-10
+    horizontaljustify right
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetLightSimpleDistance$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    cvarcheckdisable "r_light_simple" 1
+}
+
+//Simple Light Distance Display
+resource
+SwitchBox
+{
+    name "Default"
+    rect 440 127 140 16
+    fgcolor 0.953 0.667 0.271 1.000
+    bgcolor 0.000 0.000 0.000 0.750
+    borderstyle "OUTLINE_BORDER"
+    bordercolor 0.122 0.157 0.251 1.000
+    
+    linkcvar "r_light_simple_dist"
+    
+    option "$$Close$$" "set r_light_simple_dist 100"  100
+    option "$$Near$$"  "set r_light_simple_dist 2500" 2500
+    option "$$Far$$"   "set r_light_simple_dist 5000" 5000
+    
+    font serpentinemedium-10
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetLightSimpleDistance$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    cvarcheckdisable "r_light_simple" 1
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+
+//Simple Lighting Distance
+resource
+PulldownMenuContainer
+{
+    name "Default"
+    rect 580 127 16 16
+    fgcolor                 0.953 0.667 0.271 1.000
+    bgcolor                 1.000 1.000 1.000 0.000
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    borderstyle "NONE"
+
+    menushader      "MENU" "textures/menu/pulldownarrow"
+    selmenushader   "MENU" "textures/menu/pulldownarrow_sel"
+    
+    addpopup "MENU" "$$Close$$" command "set r_light_simple_dist 100"
+    addpopup "MENU" "$$Near$$"  command "set r_light_simple_dist 2500"
+    addpopup "MENU" "$$Far$$"   command "set r_light_simple_dist 5000"
+
+    popup_width "MENU" 160
+    font serpentinemedium-10
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetLightSimpleDistance$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    cvarcheckdisable "r_light_simple" 1
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+//Shadow
+resource
+Label
+{
+    title "$$Shadows$$"
+    name "Default"
+    rect 255 147 185 16
+    
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.122 0.157 0.251 1.000
+    borderstyle "3D_BORDER"
+    
+    font serpentinemedium-10
+    horizontaljustify right
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SelectShadowType$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+}
+
+resource
+SwitchBox
+{
+    title "$$Shadows$$"
+    name "Default"
+    rect 440 147 140 16
+    
+    fgcolor 0.953 0.667 0.271 1.000
+    bgcolor 0.000 0.000 0.000 0.750
+    borderstyle "OUTLINE_BORDER"
+    bordercolor 0.122 0.157 0.251 1.000
+   
+    linkcvar "cg_shadows"
+
+    option "$$None$$"       "set cg_shadows 0" 0
+    option "$$Simple$$"     "set cg_shadows 1" 1
+    option "$$Stencil$$"    "set cg_shadows 2" 2
+       
+    font serpentinemedium-10
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SelectShadowType$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+resource
+PulldownMenuContainer
+{
+    name "Default"
+    rect 580 147 16 16
+    
+    fgcolor                 0.953 0.667 0.271 1.000
+    bgcolor                 1.000 1.000 1.000 0.000
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+    
+    menushader "MENU" "textures/menu/pulldownarrow"
+    selmenushader "MENU" "textures/menu/pulldownarrow_sel"
+    
+    addpopup    "MENU" "$$None$$"      command "set cg_shadows 0"
+    addpopup    "MENU" "$$Simple$$"    command "set cg_shadows 1"
+    addpopup    "MENU" "$$Stencil$$"   command "set cg_shadows 2"
+    popup_width "MENU" 156
+    
+    font serpentinemedium-10
+
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SelectShadowType$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+
+//Flares
+resource
+Label
+{
+    title "$$Flares$$"
+    name "Default"
+    rect 255 167 185 16
+    
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.122 0.157 0.251 1.000
+    borderstyle "3D_BORDER"
+    
+    font serpentinemedium-10
+    
+    horizontaljustify right
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SelectFlareType$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+}
+
+resource
+SwitchBox
+{
+    title "$$Flares$$"
+    name "Default"
+    rect 440 167 140 16
+    
+    fgcolor 0.953 0.667 0.271 1.000
+    bgcolor 0.000 0.000 0.000 0.750
+    borderstyle "OUTLINE_BORDER"
+    bordercolor 0.122 0.157 0.251 1.000
+    
+    linkcvar "r_flares"
+    
+    option "$$None$$"       "set r_flares 0" 0
+    option "$$Simple$$"     "set r_flares 1" 1
+    option "$$Precise$$"    "set r_flares 2" 2
+
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SelectFlareType$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+
+resource
+PulldownMenuContainer
+{
+    name "Default"
+    rect 580 167 16 16
+    fgcolor                 0.953 0.667 0.271 1.000
+    bgcolor                 1.000 1.000 1.000 0.000
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+    
+    menushader "MENU" "textures/menu/pulldownarrow"
+    selmenushader "MENU" "textures/menu/pulldownarrow_sel"
+    
+    addpopup "MENU" "$$None$$"		command "set r_flares 0"
+    addpopup "MENU" "$$Simple$$" 	command "set r_flares 1"
+    addpopup "MENU" "$$Precise$$"   command "set r_flares 2"
+    
+    popup_width "MENU" 156
+    font serpentinemedium-10
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SelectFlareType$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+
+//Vertex Lighting
+resource
+Checkbox
+{
+    title "$$VertexLighting$$"
+    name "Default"
+    rect 255 187 232 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.50 0.50 0.50 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+
+    linkcvar r_vertexlight
+    
+    font serpentinemedium-10
+    horizontaljustify left
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+    
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+    
+
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableVertexLighting$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+//Dynamic Lights
+resource
+Checkbox
+{
+    title "$$DynamicLights$$"
+    name "Default"
+    rect 255 207 210 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.50 0.50 0.50 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+
+    disabledfgcolor     0.5 0.5 0.5 0.5
+    //disabledbgcolor     0.5 0.0 0.5 0.5
+    disabledshadercolor 0.5 0.5 0.5 0.5
+    
+    borderstyle "NONE"
+
+    linkcvar "r_dynamiclight"
+    
+    font serpentinemedium-10
+    horizontaljustify left
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+    
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableDynamicLights$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+    cvarcheckdisable "r_vertexlight" 1
+    
+}
+
+//Dynamic Lightmaps
+resource
+Checkbox
+{
+    title "$$DynamicLightmaps$$"
+    name "Default"
+    rect 255 227 210 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.50 0.50 0.50 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+
+    disabledfgcolor     0.5 0.5 0.5 0.5
+    //disabledbgcolor     0.5 0.0 0.5 0.5
+    disabledshadercolor 0.5 0.5 0.5 0.5
+    
+    borderstyle "NONE"
+
+    linkcvar "r_dynamiclightmaps"
+    
+    font serpentinemedium-10
+    horizontaljustify left
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+    
+
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableDynamicLightMaps$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    cvarcheckdisable "r_vertexlight" 1
+    
+}
+
+
+resource 
+Label
+{
+    title "$$EffectsAndDetail$$"
+	name "Default"
+	rect 34 251 568 16
+	fgcolor 1.000 1.000 1.000 1.000
+	bgcolor 0.278 0.365 0.510 1.000
+	font serpentinemedium-10
+	borderstyle "3D_BORDER"
+}
+
+
+
+resource
+Widget
+{
+	name "Default"
+	rect 34 267 567 129
+	fgcolor 1 1 1 1
+	bgcolor 0.000 0.000 0.000 0.75
+
+	borderstyle "OUTLINE_BORDER"
+	borderwidth 1
+	bordercolor 0.278 0.365 0.510 1.000
+}
+
+
+//Special Effects Detail
+resource
+Label
+{
+    title "$$SpecialEffectsDetail$$"
+    name "Default"
+    rect 38 271 185 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.122 0.157 0.251 1.000
+    borderstyle "3D_BORDER"
+
+    font serpentinemedium-10
+    horizontaljustify right
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetSpecialEffectsDetail$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+}
+
+//Special Effects switchbox
+resource
+SwitchBox
+{
+    name "Default"
+    rect 223 271 140 16
+    
+    fgcolor 0.953 0.667 0.271 1.000
+    bgcolor 0.000 0.000 0.000 0.750
+    borderstyle "OUTLINE_BORDER"
+    bordercolor 0.122 0.157 0.251 1.000
+    
+    linkcvar "cg_effectdetail"
+    
+    option "$$Low$$"        "set cg_effectdetail 0.5" 0.5
+    option "$$Medium$$"     "set cg_effectdetail 0.8" 0.8
+    option "$$High$$"       "set cg_effectdetail 1.0" 1.0
+
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetSpecialEffectsDetail$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+ 
+}
+
+
+resource
+PulldownMenuContainer
+{
+    name "Default"
+    rect 363 271 16 16
+    fgcolor                 0.953 0.667 0.271 1.000
+    bgcolor                 1.000 1.000 1.000 0.000
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+    
+    menushader "MENU" "textures/menu/pulldownarrow"
+    selmenushader "MENU" "textures/menu/pulldownarrow_sel"
+    
+    addpopup "MENU" "$$Low$$"		command "set cg_effectdetail 0.5"
+    addpopup "MENU" "$$Medium$$" 	command "set cg_effectdetail 0.8"
+    addpopup "MENU" "$$High$$"      command "set cg_effectdetail 1.0"
+    
+    popup_width "MENU" 156
+    font serpentinemedium-10
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetSpecialEffectsDetail$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+ 
+}
+
+//Curve Error
+resource
+Label
+{
+    title "$$CurveDetail$$"
+    name "Default"
+    rect 38 291 185 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.122 0.157 0.251 1.000
+    borderstyle "3D_BORDER"
+
+    font serpentinemedium-10
+    horizontaljustify right
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetCurveError$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+}
+
+//Curve Error switchbox
+resource
+SwitchBox
+{
+    name "Default"
+    rect 223 291 140 16
+    
+    fgcolor 0.953 0.667 0.271 1.000
+    bgcolor 0.000 0.000 0.000 0.750
+    borderstyle "OUTLINE_BORDER"
+    bordercolor 0.122 0.157 0.251 1.000
+    
+    linkcvar "r_lodCurveError"
+    
+    option "$$Low$$"        "set r_lodCurveError 10"  10
+    option "$$Medium$$"     "set r_lodCurveError 125" 125
+    option "$$High$$"       "set r_lodCurveError 250" 250
+
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetCurveError$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+
+resource
+PulldownMenuContainer
+{
+    name "Default"
+    rect 363 291 16 16
+    fgcolor                 0.953 0.667 0.271 1.000
+    bgcolor                 1.000 1.000 1.000 0.000
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+    
+    menushader "MENU" "textures/menu/pulldownarrow"
+    selmenushader "MENU" "textures/menu/pulldownarrow_sel"
+    
+    addpopup "MENU" "$$Low$$"		command "set r_lodCurveError 10"
+    addpopup "MENU" "$$Medium$$" 	command "set r_lodCurveError 125"
+    addpopup "MENU" "$$High$$"      command "set r_lodCurveError 250"
+    
+    popup_width "MENU" 156
+    font serpentinemedium-10
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetCurveError$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+
+
+//Level of Detail 
+resource
+Label
+{
+    title "$$LevelOfDetailDistance$$"
+    name "Default"
+    rect 38 311 185 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.122 0.157 0.251 1.000
+    borderstyle "3D_BORDER"
+
+    font serpentinemedium-10
+    horizontaljustify right
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetLODScaleDistance$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+}
+
+//Curve Error switchbox
+resource
+SwitchBox
+{
+    name "Default"
+    rect 223 311 140 16
+    
+    fgcolor 0.953 0.667 0.271 1.000
+    bgcolor 0.000 0.000 0.000 0.750
+    borderstyle "OUTLINE_BORDER"
+    bordercolor 0.122 0.157 0.251 1.000
+    
+    linkcvar "r_lodScaleDistance"
+    
+    option "$$Close$$"     "set r_lodScaleDistance 3.0"  3.0
+    option "$$Near$$"      "set r_lodScaleDistance 1.5"  1.5
+    option "$$Far$$"       "set r_lodScaleDistance 1.0"  1.0
+
+//    option "$$Close$$"     "set r_lodScaleDistance 1.0"  1.0
+//    option "$$Near$$"      "set r_lodScaleDistance 0.5"  0.5
+//    option "$$Far$$"       "set r_lodScaleDistance 0.1"  0.1
+
+    font serpentinemedium-10
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetLODScaleDistance$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+
+resource
+PulldownMenuContainer
+{
+    name "Default"
+    rect 363 311 16 16
+    fgcolor                 0.953 0.667 0.271 1.000
+    bgcolor                 1.000 1.000 1.000 0.000
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+    
+    menushader "MENU" "textures/menu/pulldownarrow"
+    selmenushader "MENU" "textures/menu/pulldownarrow_sel"
+    
+    addpopup "MENU" "$$Close$$"		command "set r_lodScaleDistance 3.0"
+    addpopup "MENU" "$$Near$$" 	    command "set r_lodScaleDistance 1.5"
+    addpopup "MENU" "$$Far$$"       command "set r_lodScaleDistance 1.0"
+    
+    popup_width "MENU" 156
+    font serpentinemedium-10
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$SetLODScaleDistance$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+//Deform Geometry
+resource
+Checkbox
+{
+    title "$$DeformGeometry$$"
+    name "Default"
+    rect 391 271 210 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.50 0.50 0.50 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+
+    linkcvar "r_allowGeometryDeforms"
+    
+    font serpentinemedium-10
+    horizontaljustify left
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableGeometryDeformation$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+
+    clicksound sound/misc/menu/click.wav
+ 
+}
+
+//Detail Surfaces
+resource
+Checkbox
+{
+    title "$$DetailSurfaces$$"
+    name "Default"
+    rect 391 291 210 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.50 0.50 0.50 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+
+    linkcvar "r_detailsurfaces"
+    
+    font serpentinemedium-10
+    horizontaljustify left
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+    
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+  
+
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableDetailSurfaces$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+ 
+}
+
+
+//Detail Textures
+resource
+Checkbox
+{
+    title "$$DetailTextures$$"
+    name "Default"
+    rect 391 311 210 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.50 0.50 0.50 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+
+    disabledfgcolor     0.5 0.5 0.5 0.5
+    //disabledbgcolor     0.5 0.0 0.5 0.5
+    disabledshadercolor 0.5 0.5 0.5 0.5
+    
+    borderstyle "NONE"
+
+    linkcvar "r_detailtextures"
+    
+    font serpentinemedium-10
+    horizontaljustify left
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+    
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableTextureDetail$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    cvarcheckdisable "r_vertexlight" 1
+    
+}
+
+
+resource
+Checkbox
+{
+    title "$$WallDecals$$"
+    name "Default"
+    rect 391 331 210 16
+    fgcolor 1.00 1.00 1.00 1.00
+    bgcolor 0.50 0.50 0.50 0.00
+    
+    shadercolor             0.953 0.667 0.271 1.000
+    hovershadercolor        0.953 0.667 0.271 1.000
+    armedshadercolor        0.953 0.667 0.271 1.000
+    selectedshadercolor     0.953 0.667 0.271 1.000
+    
+    borderstyle "NONE"
+
+    linkcvar "cg_marks"
+    
+    font serpentinemedium-10
+    horizontaljustify left
+    
+    checked_shader "textures/menu/checkbox_checked"
+    unchecked_shader "textures/menu/checkbox_unchecked"
+    
+    hovershader menu/generic/button-hover
+    armedshader menu/generic/button-press
+
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$EnableWallDecals$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+resource
+Button
+{
+	title "$$Apply$$"
+	name 	"Default"
+	rect 	 424 401 123 26
+	font serpentinemedium-12
+	fgcolor 		1.000 1.000 1.000 1.000
+	bgcolor 		0.000 0.000 0.000 0.000
+
+	hovershader menu/generic/button-hover
+	pressedshader menu/generic/button-press
+
+    stuffcommand "ui_checkrestart"
+    
+    hovercommand "globalwidgetcommand tooltip_videoadv title \"$$ApplyCurrentChangesToVideo$$\""
+    hoverexitcommand "globalwidgetcommand tooltip_videoadv title \"\""
+    
+    clicksound sound/misc/menu/click.wav
+    
+}
+
+end.

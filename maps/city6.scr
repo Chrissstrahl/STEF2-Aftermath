@@ -1,0 +1,276 @@
+void main();
+void quadStomp();
+
+void main()
+{
+	// Entity fade dist
+	$world.entity_fade_dist( 16000 );
+	
+	//enable sky(skybox)
+	$sky.rendereffects( "+skyorigin" );
+	
+	//clear/set viewmodes avialbe for Tricorder
+	$world.clearAvailableViewModes();
+	
+	$camfront.roll( 180 );
+	//spawn camera early so its done before level starts
+	spawn("camera","targetname","cam1");	
+	spawn("camera","targetname","cam2");
+	spawn("camera","targetname","cam3");	
+	
+	wait(0.5);
+	
+	//clear/set viewmodes avialbe for Tricorder
+	$world.clearAvailableViewModes();
+	$world.addAvailableViewMode("structuralintegrity");
+	
+//give weapons from previouse level, in case player loads city6 from console
+	$player.give("models/weapons/worldmodel-compressionrifle.tik");
+	$player.give("models/weapons/worldmodel-sniperrifle.tik");
+	$player.give("models/weapons/worldmodel-tricorder-stx.tik");
+	$player.give("models/weapons/worldmodel-phaser-stx.tik");	
+	
+	//setup shuttle, bind parts to the pointer
+	$shuttle.bind($shuttleOrigin);
+		
+//hide munro
+	$munro.hide();
+	$munro.notsolid();
+	$player.notsolid();
+	$munro.ai_off();
+	$munro2.hide();
+	$munro2.ai_off();
+	$munro2.notsolid();
+	$romulanguy.ai_off();
+	$informant1.ai_off();
+	$stompyQuad.ai_off();
+	$stompyQuad2.ai_off();
+	$chang.ai_off();
+	$korban.ai_off();
+}
+
+
+void quadStomp()
+{
+
+	$stompyQuad.anim("run");
+	wait(0.8);
+	$stompyQuad.anim("idle");
+	$stompyQuad.turntowardsplayer();
+	$stompyQuad.anim("idle");
+	wait(0.1);
+	$stompyQuad.anim("stomp");
+	wait(1);
+//move down and show explosion effects - but hoide and notsolid it for now, we can add details later
+	$brakingAwayFloor1.hide();
+	$brakingAwayFloor1.notsolid();
+	wait(1);
+	$stompyQuad.anim("idle");
+}
+
+void introcinematic()
+{
+	//fade out cam
+	cam_fadeOut(0.25,0,0,0,1);
+
+//wait a moment for the camera to spawn
+	wait(0.05);
+
+//wait a moment for the camera to spawn
+	wait(1);
+	//fade in cam
+	$munro.show();
+	//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+//time 1.0002 sec 
+		wait(1.0);
+		$cam1.follow($introcinematic);	
+		$cam1.cut();
+		cuecamera($cam1);
+		cam_fadeIn(0.25,0,0,0,1);
+		wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+	}
+	
+	$munro.walkto("munronode1","walk");
+	$korban.walkto("korbannode1","walk");
+	$chang.walkto("changnode1","walk");
+	wait(4);
+	$cam2.follow($cut2);	
+	$cam2.cut();
+	cuecamera($cam2);
+$informant1.playDialog("localization/sound/dialog/m10l2/info_verywell.mp3",2,128,0);
+waitforDialog($informant1);
+$romulanguy.playDialog("localization/sound/dialog/m2l2/romsold2_fed.mp3",2,128,0);
+waitforDialog($romulanguy);
+$informant1.walkto("informantnode1","run");
+$soldier.ai_on();
+$soldier.turntowardsplayer();
+$soldier.attack($player);
+$soldier2.ai_on();
+$soldier2.turntowardsplayer();
+$soldier2.attack($player);
+$soldier4.ai_on();
+$soldier4.turntowardsplayer();
+$soldier4.attack($player);
+	//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		$cam3.follow($cut3);
+		$cam3.cut();
+		wait(0.1);
+		cuecamera($cam3);
+	}
+	
+	//start the shuttle now
+	$shuttleOrigin.followpath( $shuttlepath);
+//play flyby sound for romulan shuttle
+	$shuttle.loopsound("sound/vehicles/shuttlecraft/shuttle_flyby_slow.WAV",1,512);
+	wait(2);
+
+//stop current cinematic
+	wait(4);
+	$romulanguy.remove();
+	$munro.remove();
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+		$player.show();
+		$player.solid();
+	}
+	cam_fadeIn(0.25,0,0,0,1);
+
+//wait for the effect to end
+	$soldier.attack($korban);
+	$chang.ai_on();
+	$korban.ai_on();
+	$munro2.ai_off();
+	$munro2.hide();
+	$munro2.notsolid();
+	$informant1.walkto("informantnode2","run");
+}
+void fightquad()
+{
+	$stompyQuad.anim("stomp");
+	wait(1);
+	$stompyQuad.walkto("quadnode1","run");
+	$breakdoor.hide();
+	$breakdoor.notsolid();
+	wait(2);
+	$stompyQuad.walkto("quadnode2","run");	
+	wait(2);
+	$stompyQuad.maxbosshealth(300);
+}
+
+void fightquad2()
+{
+	wait(1);
+	$stompyQuad.angle(180);
+	$stompyQuad.anim("stomp");
+	wait(1);
+	$stompyQuad.walkto("quadnode1","run");
+	$stompyQuad.anim("stomp");
+	wait(2);
+	$stompyQuad.walkto("quadnode2","run");	
+	waitfor($stompyQuad);
+	$stompyQuad.anim("stomp");
+}
+
+
+void fightquad3()
+{
+	$stompyQuad.angle(180);
+	$stompyQuad.anim("stomp");
+	$stompyQuad.walkto("quadnode3","run");
+	$tunnelwall.remove();
+	wait(2);
+	$stompyQuad.walkto("quadnode4","run");
+	wait(2);
+	$stompyQuad.ai_on();
+	$stompyQuad.updatebosshealth( 1 , 1 );
+	$stompyQuad.maxbosshealth( 301 );
+	$stompyQuad.health( 300 );
+}
+
+void informant2()
+{
+$informant2.show();
+$informant2.ai_off();
+$informant2.walkto("informantnode2","walk");
+wait(5);
+$informant2.remove();
+}
+
+void dataretrieved()
+{
+$informantfight.triggerable();
+}
+
+void fightspy()
+{
+	//fade out cam
+	cam_fadeOut(0.25,0,0,0,1);
+
+//wait a moment for the camera to spawn
+	wait(0.05);
+	$boss.ai_off();
+//wait a moment for the camera to spawn
+	wait(1);
+	//fade in cam
+	$munro2.show();
+	
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+//time 1.0002 sec 
+		wait(1.0);
+		cam_fadeIn(0.25,0,0,0,1);
+		$cam1.follow($bossfight);//not found
+		$cam1.cut();//not found
+		wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+		cuecamera($cam1);
+	}
+		
+
+	$munro2.show();
+	wait(0.5);
+	$munro2.walkto("munronode","walk");
+	wait(4);
+	$munro2.lookat($boss);
+	$boss.playDialog("localization/sound/dialog/m10l2/info_shootout.mp3",2,128,0);
+	wait(2);
+	$munro2.remove();
+	
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+		$player.show();
+		$player.solid();
+	}
+	cam_fadeIn(0.25,0,0,0,1);	
+
+	$boss.ai_on();
+	$boss.health(300);
+	$boss.maxbosshealth(300);
+	
+//make korban and chang able to die
+	$korban.immortal(0);
+	$korban.health(40);
+	$chang.immortal(0);
+	$chang.health(40);
+	wait(0.1);
+}

@@ -1,0 +1,74 @@
+setup
+{
+        boundingvolumemin 15 -15 0  //xyz
+		boundingvolumemax 18 18 93 //xyz
+}
+
+
+init
+{
+	server
+	{
+		//-------------------------------------------------------------
+		// Setup Actor
+		//-------------------------------------------------------------
+		classname Actor
+		setsize	"-12 -12 0"	"12	12 80"
+		actortype "enemy"
+		mass 250
+		deathfade
+		pushable
+		settargetposition "Bip01 Spine2"
+		bloodmodel fx/fx-bloodspurt-brown.tik
+		talkiness .45
+
+		//-------------------------------------------------------------
+		// Setup Damage	Modifiers
+		//------------------------------------------------------------
+		damagemodifier actortype enemy 1
+		damagemodifier actortype teammate 0
+		damagemodifier actortype friend	0
+
+		//-------------------------------------------------------------
+		// Setup AI
+		//-------------------------------------------------------------
+		masterstatemap ai/KlnM9/MS_KlnM9_Merc_Batleth.st
+		//posturestatemap ai/Humanoid_Postures.st
+
+		//Tendencies
+		settendency	"pullalarm"				0.0
+		settendency	"ambush"				0.0
+		settendency	"snipeenemy"			0.0
+		settendency	"work"					0.0
+		settendency	"patrol"				0.0
+		settendency	"wander"				1.0
+		settendency	"follow"				0.0
+		settendency	"getoutoftheway"		0.0
+		settendency	"handlecallvolume"		0.0
+		settendency	"changepositions"		1.0
+		settendency	"seekenemyfromposition"	1.0
+
+		//Default Weapons
+		giveactorweapon	"actorweapons/klingon-knife.tik"
+		useactorweapon "knife" "left"
+
+		// Behavior	Package	Registration
+		registerpackage	"general_ai_off"
+		//registerpackage	"humanoid_core"
+		//registerpackage	"humanoid_seek"
+		//registerpackage	"humanoid_ambush"
+		//registerpackage	"humanoid_combat"
+		//registerpackage	"humanoid_snipe"
+		registerpackage 	"klingon-m9-merc-batleth-core"
+		registerpackage		"klingon-m9-merc-batleth-combat"
+
+
+		//--------------------------------------------------------------
+		// GPD
+		//--------------------------------------------------------------
+		// Grab	data from the GPD
+		processgameplaydata
+
+	}
+}
+

@@ -1,0 +1,225 @@
+menu "city_main" 640 480 NONE 0
+bgcolor 0.0 0.0 0.0 0.5
+borderstyle NONE
+depth 0.2
+noescape 1
+
+showcommand "city_ui_underwater 0\n"
+pushcommand "ui_showmouse\n"
+popcommand "ui_hidemouse\n"
+
+resource
+Widget
+{
+	rect 0 0 640 480
+
+	fgcolor 		1.000 1.000 1.000 0.500
+	bgcolor 		0 0 1 0.25
+	shadercolor		1.000 1.000 1.000 1.000
+	
+	cvarvisibility city_ui_underwater 1 == 
+}
+
+resource
+Widget
+{
+	rect 130 290 310 100
+
+	fgcolor 		1.000 1.000 1.000 0.500
+	bgcolor 		0.000 0.000 0.000 0.000
+	shadercolor		1.000 1.000 1.000 1.000
+	shader menu/main/citylogo
+}
+resource
+Label
+{
+	title "The Aftermath Episodes:"
+	font serpentinemedium-10
+	rect 160 280 260 46
+	fgcolor 		1 1 1 .7
+	bgcolor 		0 0 0 0
+
+	borderstyle "none"
+}
+resource
+Label
+{
+	title "The City"
+	font serpentinemedium-24
+	rect 160 305 260 46
+	fgcolor 		0 0 0 .7
+	bgcolor 		0 0 0 0
+
+	borderstyle "none"
+}
+resource
+Label
+{
+	title "by Daedalus"
+	font serpentinelight-8
+	rect 160 348 260 26
+	fgcolor 		1 1 1 0.5
+	bgcolor 		0.000 0.000 0.000 0.000
+
+	borderstyle "none"
+}
+
+
+resource
+Widget
+{
+rect 42 119 256 32
+
+	fgcolor 		1.000 1.000 1.000 1.000
+	bgcolor 		0.000 0.000 0.000 0.000
+	hoverfgcolor		1.000 1.000 1.000 1.000
+	hoverbgcolor		0.000 0.000 0.000 0.000
+	selectedfgcolor 	1.000 1.000 1.000 1.000
+	selectedbgcolor 	0.000 0.000 0.000 0.000
+	
+	shadercolor		0.000 1.000 0.000 1.000
+	hovershadercolor	0.000 1.000 0.000 1.000
+	
+    shader menu/main/credits
+
+}
+
+
+resource
+Button
+{
+	title "New Game"
+	font serpentinemedium-10
+	rect 94 122 123 26
+	fgcolor 		1.0   1.0   1.0   1.0
+	bgcolor 		0.000 0.000 0.000 0.000
+
+	borderstyle "none"
+
+	stuffcommand "pushmenu newgame\n"
+	
+	hovershader menu/generic/button-hover
+	pressedshader menu/generic/button-press
+	
+    clicksound sound/misc/menu/click.wav
+}
+
+resource
+Widget
+{
+	rect 42 151 256 32
+	fgcolor 		1.000 1.000 1.000 1.000
+	bgcolor 		0.000 0.000 0.000 0.000
+	hoverfgcolor		1.000 1.000 1.000 1.000
+	hoverbgcolor		0.000 0.000 0.000 0.000
+	selectedfgcolor 	1.000 1.000 1.000 1.000
+	selectedbgcolor 	0.000 0.000 0.000 0.000
+	
+	shadercolor		1.000 1.000 1.000 1.000
+	hovershadercolor	1.000 1.000 1.000 1.000
+	
+    shader menu/main/credits
+}
+
+resource
+Button
+{
+	title "Load Game"
+	
+	font serpentinemedium-10
+	horizontaljustify center
+	verticaljustify center
+	
+	rect 94 154 123 26
+	fgcolor 		1.0   1.0   1.0   1.0
+	bgcolor 		0.000 0.000 0.000 0.000
+
+	borderstyle "none"
+
+	stuffcommand "pushmenu loadgame\n"
+	
+	hovershader menu/generic/button-hover
+	pressedshader menu/generic/button-press
+	
+    clicksound sound/misc/menu/click.wav
+}
+
+resource
+Widget
+{
+	rect 42 183 256 32
+	fgcolor 		1.000 1.000 1.000 1.000
+	bgcolor 		0.000 0.000 0.000 0.000
+	hoverfgcolor		1.000 1.000 1.000 1.000
+	hoverbgcolor		0.000 0.000 0.000 0.000
+	selectedfgcolor 	1.000 1.000 1.000 1.000
+	selectedbgcolor 	0.000 0.000 0.000 0.000
+	
+	shadercolor		1.000 1.000 1.000 1.000
+	hovershadercolor	1.000 1.000 1.000 1.000
+	
+    shader menu/main/credits
+}
+
+resource
+Button
+{
+	title "Options"
+	
+	font serpentinemedium-10
+	horizontaljustify center
+	verticaljustify center
+	
+	rect 94 186 123 26
+	fgcolor 		1.0   1.0   1.0   1.0
+	bgcolor 		0.000 0.000 0.000 0.000
+
+	borderstyle "none"
+
+	stuffcommand "pushmenu GameOptions\n"
+	
+	hovershader menu/generic/button-hover
+	pressedshader menu/generic/button-press
+	
+    clicksound sound/misc/menu/click.wav
+}
+
+resource
+Widget
+{
+    rect 42 215 256 32
+
+	fgcolor 		1.000 1.000 1.000 1.000
+	bgcolor 		0.000 0.000 0.000 0.000
+	hoverfgcolor		1.000 1.000 1.000 1.000
+	hoverbgcolor		0.000 0.000 0.000 0.000
+	selectedfgcolor 	1.000 1.000 1.000 1.000
+	selectedbgcolor 	0.000 0.000 0.000 0.000
+	
+	shadercolor		1.000 0.000 0.000 1.000
+	hovershadercolor	1.000 0.000 0.000 1.000
+	
+    shader menu/main/credits
+}
+
+resource
+Button
+{
+	title "Exit"
+	name "exito"
+	font serpentinemedium-10
+	rect 94 218 123 26
+	fgcolor 		1.0   1.0   1.0   1.0
+	bgcolor 		0.000 0.000 0.000 0.000
+
+	borderstyle "none"
+
+	stuffcommand "quit\n"
+	
+	hovershader menu/generic/button-hover
+	pressedshader menu/generic/button-press
+	
+    clicksound sound/misc/menu/click.wav
+}
+
+

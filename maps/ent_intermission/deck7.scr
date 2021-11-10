@@ -1,0 +1,4 @@
+void crew()
+{
+	$kretar.walkto("kretarnode1","walk");
+}

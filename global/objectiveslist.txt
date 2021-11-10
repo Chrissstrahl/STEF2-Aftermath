@@ -1,0 +1,1889 @@
+//=========================================================================================================
+//=========================================================================================================
+//	SECRETS
+//=========================================================================================================
+//=========================================================================================================
+secret1
+{
+	objective
+		{
+		name "secretObjectiveS1"
+		desc "$$secretObjectiveS1$$"
+		}
+}
+
+secret2
+{
+	objective
+		{
+		name "secretObjectiveS2"
+		desc "$$secretObjectiveS2$$"
+		}
+}
+
+secret3
+{
+	objective
+		{
+		name "secretObjectiveS3"
+		desc "$$secretObjectiveS3$$"
+		}
+}
+
+ef2_minigame2
+{
+	objective
+		{
+		name "minigameObjective"
+		desc "$$minigameObjective$$"
+		}
+}
+
+
+//=========================================================================================================
+//=========================================================================================================
+//	TRAINING
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// TRAINING LEVEL 1
+//==============================================================================
+ent-training1
+{
+	objective
+	{
+		name "moveAroundT1"
+		desc "$$moveAroundT1$$"
+	}
+	objective
+	{
+		name "jumpUpT1"
+		desc "$$jumpUpT1$$"
+	}
+	objective
+	{
+		name "duckT1"
+		desc "$$duckT1$$"
+	}
+	objective
+	{
+		name "jumpDuckT1"
+		desc "$$jumpDuckT1$$"
+	}
+	objective
+	{
+		name "ladderT1"
+		desc "$$ladderT1$$"
+	}
+	objective
+	{
+		name "crouchJumpT1"
+		desc "$$crouchJumpT1$$"
+	}
+	objective
+	{
+		name "jefferysT1"
+		desc "$$jefferysT1$$"
+	}
+
+}
+
+//==============================================================================
+// TRAINING LEVEL 2
+//==============================================================================
+ent-training2
+{
+	objective
+	{
+		name "jumpGapT2"
+		desc "$$jumpGapT2$$"
+	}
+	objective
+	{
+		name "jumpDownT2"
+		desc "$$jumpDownT2$$"
+	}
+	objective
+	{
+		name "healthT2"
+		desc "$$healthT2$$"
+	}
+	objective
+	{
+		name "panelT2"
+		desc "$$panelT2$$"
+	}
+	objective
+	{
+		name "liftT2"
+		desc "$$liftT2$$"
+	}
+	objective
+	{
+		name "consoleT2"
+		desc "$$consoleT2$$"
+	}
+}
+
+//==============================================================================
+// TRAINING LEVEL 3
+//==============================================================================
+ent-training3
+{
+	objective
+	{
+		name "consoleT3"
+		desc "$$consoleT3$$"
+	}
+	objective
+	{
+		name "tricorderT3"
+		desc "$$tricorderT3$$"
+	}
+	objective
+	{
+		name "blipT3"
+		desc "$$blipT3$$"
+	}
+	objective
+	{
+		name "nightvisionT3"
+		desc "$$nightvisionT3$$"
+	}
+	objective
+	{
+		name "consoleModulateT3"
+		desc "$$consoleModulateT3$$"
+	}
+	objective
+	{
+		name "destroyConduitT3"
+		desc "$$destroyConduitT3$$"
+	}
+	objective
+	{
+		name "integrityT3"
+		desc "$$integrityT3$$"
+	}
+}
+
+//==============================================================================
+// TRAINING LEVEL 4
+//==============================================================================
+ent-training4
+{
+	objective
+	{
+		name "phaserT4"
+		desc "$$phaserT4$$"
+	}
+	objective
+	{
+		name "rifleT4"
+		desc "$$rifleT4$$"
+	}
+}
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 1
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 1 LEVEL 1
+//==============================================================================
+m1l1-borg_sphere
+{
+objective
+   {
+   name "FindChell"
+   desc "$$LocateChell$$"
+   }
+objective
+   {
+   name "FindTelsia"
+   desc "$$LocateTelsia$$"
+   }
+objective
+   {
+   name "RescueChang"
+   desc "$$RescueChang$$"
+   }
+objective
+   {
+   name "TakeDownForcefield"
+   desc "$$TakeDownForcefield$$"
+   }
+objective
+   {
+   name "SaveTelsia"
+   desc "$$RescueTelsia$$"
+   }
+objective
+   {
+   name "MainLift"
+   desc "$$MainLift$$"
+   }
+objective
+   {
+   name "FindGenerators"
+   desc "$$FindGenerators$$"
+   }
+information
+   {
+   name "YellowField"
+   data "$$YellowFieldInformation$$"
+   shader hud/mission_objective_taskbar
+   }
+information
+   {
+   name "GreenField"
+   data "$$GreenFieldInformation$$"
+   shader hud/mission_objective_taskbar
+   }
+information
+   {
+   name "BlueField"
+   data "$$BlueFieldInformation$$"
+   shader hud/mission_objective_taskbar
+   }
+information
+   {
+   name "FindGenerator"
+   data "$$FindGenerator$$"
+   shader hud/mission_objective_taskbar
+   }
+}
+
+//==============================================================================
+// MISSION 1 LEVEL 2
+//==============================================================================
+m1l2-borg_sphere
+{
+objective
+   {
+   name "FindImod"
+   desc "$$FindImod$$"
+   }
+objective
+   {
+   name "FindGenerator1"
+   desc "$$FindGenerator1$$"
+   }
+objective
+   {
+   name "FindGenerator2"
+   desc "$$FindGenerator2$$"
+   }
+objective
+   {
+   name "FindGenerator3"
+   desc "$$FindGenerator3$$"
+   }
+information
+   {
+   name "YellowField"
+   data "$$YellowFieldInformation$$"
+   shader hud/mission_objective_taskbar
+   }
+information
+   {
+   name "GreenField"
+   data "$$GreenFieldInformation$$"
+   shader hud/mission_objective_taskbar
+   }
+information
+   {
+   name "BlueField"
+   data "$$BlueFieldInformation$$"
+   shader hud/mission_objective_taskbar
+   }
+information
+   {
+   name "FindGenerator"
+   data "$$FindGenerator$$"
+   shader hud/mission_objective_taskbar
+   }
+}
+
+
+//==============================================================================
+// MISSION 1 LEVEL 3
+//==============================================================================
+//================================================
+// SUB LEVEL m1l3-borg_boss
+//================================================
+
+m1l3-borg_boss
+{
+objective
+   {
+   name "DestroyBoss"
+   desc "$$DestroyBorgBoss$$"
+   }
+
+information
+   {
+   name "YellowField"
+   data "$$YellowFieldInformation$$"
+   shader hud/mission_objective_taskbar
+   }
+
+information
+   {
+   name "GreenField"
+   data "$$GreenFieldInformation$$"
+   shader hud/mission_objective_taskbar
+   }
+
+information
+   {
+   name "BlueField"
+   data "$$BlueFieldInformation$$"
+   shader hud/mission_objective_taskbar
+   }
+}
+
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 2
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 2 LEVEL 1
+//==============================================================================
+
+//================================================
+// SUB LEVEL m2l1-sfa
+//================================================
+
+m2l1-sfa
+{
+objective
+   {
+   name "MeetVisitor"
+   desc "$$MeetVisitor$$"
+   }
+objective
+   {
+   name "GoToHeadmaster"
+   desc "$$GoToHeadmaster$$"
+   }
+objective
+   {
+   name "MeetTelsia"
+   desc "$$MeetTelsia$$"
+   }
+}
+
+
+//==============================================================================
+// MISSION 2 LEVEL 2
+//==============================================================================
+
+//================================================
+// SUB LEVEL m2l2-sfa
+//================================================
+
+m2l2-sfa
+{
+objective
+   {
+   name "EscapeFacility"
+   desc "$$EscapeFacility$$"
+   }
+objective
+   {
+   name "RepairDoorBarracks"
+   desc "$$RepairDoorBarracks$$"
+   }
+}
+
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 3
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 3 LEVEL 1
+//==============================================================================
+
+//================================================
+// SUB LEVEL m3l1a-forever
+//================================================
+
+m3l1a-forever
+{
+objective
+  {
+  name "ExploreShip"
+  desc "$$ExploreShip$$"
+  }
+
+objective
+  {
+  name "RestoreGravity"
+  desc "$$RestoreGravity$$"
+  }
+objective
+  {
+  name "ReroutePower"
+  desc "$$ReroutePowerToCargoBayDoor$$"
+  }
+objective
+  {
+  name "UnlockDoors"
+  desc "$$UnlockShuttleBayDoors$$"
+  }
+information
+   {
+   name "NightVision"
+   data "$$UseNightVision$$"
+   shader hud/mission_objective_taskbar
+   }
+}
+
+m3l1b-forever
+{
+objective
+  {
+  name "RestorePower"
+  desc "$$RestorePowerInEngineering$$"
+  }
+objective
+  {
+  name "RetrieveLogs"
+  desc "$$RetrieveCaptainLogsOnBridge$$"
+  }
+objective
+  {
+  name "TurboliftPower"
+  desc "$$RestoreTurboLiftPower$$"
+  }
+  
+information
+   {
+   name "NightVision"
+   data "$$UseNightVision$$"
+   shader hud/mission_objective_taskbar
+   }
+}
+
+//==============================================================================
+// MISSION 3 LEVEL 2
+//==============================================================================
+
+//================================================
+// SUB LEVEL m3l2-forever
+//================================================
+
+m3l2-forever
+{
+objective
+  {
+  name "RetrieveLogs"
+  desc "$$RetrieveCaptainLogsOnBridge$$"
+  }
+objective
+  {
+  name "RescueCrew"
+  desc "$$RescueDallasCrew$$"
+  }
+objective
+  {
+  name "RescueChell"
+  desc "$$RescueChell$$"
+  }
+information
+   {
+   name "NightVision"
+   data "$$UseNightVision$$"
+   shader hud/mission_objective_taskbar
+   }
+}
+
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 4
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 4 LEVEL 1
+//==============================================================================
+
+//================================================
+// SUB LEVEL m4l1a-attrexian_station
+//================================================
+
+m4l1a-attrexian_station
+{
+	objective
+	{
+		name "CommandCenter"
+		desc "$$ProceedToCommandCenter$$"
+	}
+	objective
+	{
+		name "FindDallasCrew"
+		desc "$$FindDallasCrew$$"
+	}
+    objective
+    {
+    	name "RestoreCartPower"
+    	desc "$$RestoreCartPower$$"
+	}
+	objective
+	{
+	    name "ActivateCart"
+	    desc "$$ActivateCart$$"
+	}
+	objective
+	{
+	    name "HelpAttrexian"
+	    desc "$$HelpAttrexian$$"
+	}
+	objective
+	{
+	    name "GetBackAttrexian"
+	    desc "$$GetBackAttrexian$$"
+	{
+}
+
+m4l1b-attrexian_station
+{
+   	objective
+	{
+		name "CommandCenter"
+		desc "$$ProceedToCommandCenter$$"
+	}
+	objective
+	{
+		name "FindDallasCrew"
+		desc "$$FindDallasCrew$$"
+	}
+	objective
+	{
+	    name "LaunchPod"
+	    desc "$$LaunchPod$$"
+	}
+	objective
+	{
+		name "HelpDefendStation"
+		desc "$$HelpDefendStation$$"
+	}
+}
+
+
+//==============================================================================
+// MISSION 4 LEVEL 2
+//==============================================================================
+
+//================================================
+// SUB LEVEL m4l2a-attrexian_station
+//================================================
+m4l2-attrexian_station
+{
+	objective
+	{
+		name "RescueChiefEngineer"
+		desc "$$RescueChiefEngineer$$"
+	}
+	objective
+	{
+		name "RestorePower"
+		desc "$$RestorePower$$"
+	}
+	objective
+	{
+		name "ProtectChiefEngineer"
+		desc "$$ProtectChiefEngineer$$"
+	}
+}
+
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 5
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 5 LEVEL 1
+//==============================================================================
+
+//================================================
+// SUB LEVEL m5l1a-drull_ruins1
+//================================================
+m5l1a-drull_ruins1
+{
+	objective
+	{
+		name "ProceedToLifeforms"
+		desc "$$ProceedToLifeforms$$"
+	}
+	objective
+	{
+		name "FindScouting"
+		desc "$$FindScouting$$"
+	}
+	objective
+	{
+		name "EnterRuins"
+		desc "$$EnterRuins$$"
+	}
+    objective
+	{
+		name "FindScientists"
+		desc "$$FindScientists$$"
+	}
+}
+m5l1b-drull_ruins1
+{	
+	objective
+	{
+		name "FindScientists"
+		desc "$$FindScientists$$"
+	}
+	objective
+    {
+		name "FindScouting"
+		desc "$$FindScouting$$"
+	}
+	objective
+	{
+		name "EnterRuins"
+		desc "$$EnterRuins$$"
+	}
+	objective
+	{
+		name "RestorePower"
+		desc "$$RestorePower$$"
+	}	
+}
+
+
+//==============================================================================
+// MISSION 5 LEVEL 2
+//==============================================================================
+
+//================================================
+// SUB LEVEL m5l2a-drull_ruins1
+//================================================
+m5l2a-drull_ruins1
+{
+	objective
+	{
+		name "FindScientists"
+		desc "$$FindScientists$$"
+	}
+	objective
+	{
+	 	name "DestroyTurrets"
+	   	desc "$$DestroyTurrets$$"
+	}
+	objective
+	{
+		name "SealGasVents"
+		desc "$$SealGasVents$$"
+	}
+	objective
+	{
+		name "DeactivateTripWires"
+		desc "$$DeactivateTripWires$$"
+	}
+	objective
+	{
+		name "ReuniteWithTeam"
+		desc "$$ReuniteWithTeam$$"
+	}
+}
+m5l2b-drull_ruins1
+{	
+	objective
+	{
+		name "FindScientists"
+		desc "$$FindScientists$$"
+	}
+	objective
+	{
+	  	  name "DestroyTurrets"
+	   	 desc "$$DestroyTurrets$$"
+	}
+	objective
+	{
+		name "SealGasVents"
+		desc "$$SealGasVents$$"
+	}
+	objective
+	{
+		name "DeactivateTripWires"
+		desc "$$DeactivateTripWires$$"
+	}
+	objective
+	{
+		name "ReuniteWithTeam"
+		desc "$$ReuniteWithTeam$$"
+	}
+}
+m5l2c-drull_ruins1
+{
+	objective
+	{
+		name "FindScientists"
+		desc "$$FindScientists$$"
+	}
+	objective
+	{
+	  	  name "DestroyTurrets"
+	   	 desc "$$DestroyTurrets$$"
+	}
+	objective
+	{
+		name "SealGasVents"
+		desc "$$SealGasVents$$"
+	}
+	objective
+	{
+		name "DeactivateTripWires"
+		desc "$$DeactivateTripWires$$"
+	}
+	objective
+	{
+		name "ReuniteWithTeam"
+		desc "$$ReuniteWithTeam$$"
+	}
+	objective
+	{
+		name "DisableTurrets"
+		desc "$$DisableTurrets$$"
+	}
+	objective
+	{
+		name "FindIdryllSon"
+		desc "$$FindIdryllSon$$"
+	}
+}
+
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 6
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 6 LEVEL 1
+//==============================================================================
+
+//================================================
+// SUB LEVEL m6-deck1_bridge
+//================================================
+
+m6-deck1_bridge
+{
+	objective
+	{
+		name "MeetHazardteam"
+		desc "$$MeetHazardTeam$$"
+	}
+}
+
+//================================================
+// SUB LEVEL m6-deck8
+//================================================
+
+m6-deck8
+{
+	objective
+	{
+		name "RepelInvaders"
+		desc "$$RepelInvaders$$"
+	}
+	objective
+	{
+		name "AssistKorban"
+		desc "$$AssistKorban$$"
+	}
+	objective
+	{
+		name "AssistJurot"
+		desc "$$AssistJurot$$"
+	}
+	objective
+	{
+		name "GetToEngineering"
+		desc "$$GetToEngineering$$"
+	}
+}
+
+//================================================
+// SUB LEVEL m6-deck11
+//================================================
+
+m6-deck11
+{
+	objective
+	{
+		name "RepelInvaders"
+		desc "$$RepelInvaders$$"
+	}
+	objective
+	{
+		name "GetToEngineering"
+		desc "$$GetToEngineering$$"
+	}
+}
+
+//================================================
+// SUB LEVEL m6-deck16_engineering
+//================================================
+
+m6-deck16_engineering
+{
+objective
+	{
+	name "RepelInvaders"
+	desc "$$RepelInvaders$$"
+	}
+objective
+	{
+	name "GetToEngineering"
+	desc "$$GetToEngineering$$"
+	}
+objective
+    {
+    name "PreventBombs"
+    desc "$$PreventBombs$$"
+    }
+objective
+	{
+	name "ClearEngineering"
+	desc "$$ClearEngineering$$"
+	}
+objective
+	{
+	name "ReRoutePower"
+	desc "$$ReReroutePower$$"
+	}
+objective
+	{
+	name "EjectWarpCore"
+	desc "$$EjectWarpCore$$"
+	}
+objective
+	{
+	name "GetToBridge"
+	desc "$$GetToBridge$$"
+	}
+}
+
+//================================================
+// SUB LEVEL m6-deck1_bridge_redalert
+//================================================
+
+m6-deck1_bridge_redalert
+{
+objective
+	{
+	name "RepelInvaders"
+	desc "$$RepelInvaders$$"
+	}
+objective
+	{
+	name "GetToBridge"
+	desc "$$GetToBridge$$"
+	}
+objective
+	{
+	name "RepairPhotonTorpedos"
+	desc "$$RepairPhotonTorpedos$$"
+	}
+}
+
+//================================================
+// SUB LEVEL m6-exterior
+//================================================
+
+m6-exterior
+{
+objective
+	{
+	name "ClearHullOfSaboteurs"
+	desc "$$ClearHullOfSaboteurs$$"
+	}
+objective
+	{
+	name "DestroyIdryllFighters"
+	desc "$$DestroyIdryllFighters$$"
+	}
+objective
+	{
+	name "DisableIdryllCommandShip"
+	desc "$$DisableIdryllCommandShip$$"
+	}
+}
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 7
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 7 LEVEL 1
+//==============================================================================
+
+//================================================
+// SUB LEVEL m7l1a-attrexian_colony
+//================================================
+m7l1a-attrexian_colony
+{
+	objective
+	{
+		name "AssistAttrexians"
+		desc "$$AssistAttrexians$$"
+	}
+	objective
+	{
+		name "GainAccess"
+		desc "$$GainAccess$$"
+	}
+	objective
+	{
+		name "RestorePowerToDoor"
+		desc "$$RestorePowerToDoor$$"
+	}
+	objective
+	{
+		name "LocateAttrexianEngineer"
+		desc "$$LocateAttrexianEngineer$$"
+	}
+	objective
+	{
+		name "HelpTrappedAttrexians"
+		desc "$$HelpTrappedAttrexians$$"
+	}
+	objective
+	{
+		name "FollowAttrexianToSewer"
+		desc "$$FollowAttrexianToSewer$$"
+	}
+	objective
+	{
+		name "EnterSewer"
+		desc "$$EnterSewer$$"
+	}
+}
+
+//================================================
+// SUB LEVEL m7l1b-attrexian_colony
+//================================================
+m7l1b-attrexian_colony
+{
+	objective
+	{	
+		name "ReuniteWithTeam"
+		desc "$$ReuniteWithTeam$$"
+	}
+	objective
+	{
+		name "RescueTrappedAttrexians"
+		desc "$$RescueTrappedAttrexians$$"
+	}
+	objective
+	{
+		name "RestorePower"
+		desc "$$RestorePower$$"
+	}
+	objective
+	{
+		name "FindElderlyIdryll"
+		desc "$$FindElderlyIdryll$$"
+	}
+	objective
+	{
+		name "FindExitToSurface"
+		desc "$$FindExitToSurface$$"
+	}
+}
+
+
+//==============================================================================
+// MISSION 7 LEVEL 2
+//==============================================================================
+
+//================================================
+// SUB LEVEL m7l2a-attrexian_colony
+//================================================
+m7l2-attrexian_colony
+{
+    objective
+	{
+		name "FindElderlyIdryll"
+		desc "$$FindElderlyIdryll$$"
+	}
+	objective
+	{
+		name "EnterFactory"
+		desc "$$EnterFactory$$"
+	}
+	objective
+	{
+		name "ExploreFactory"
+		desc "$$ExploreFactory$$"
+	}
+	objective
+	{
+		name "RestoreLiftPower"
+		desc "$$RestoreLiftPower$$"
+	}
+	objective
+	{
+		name "InvestigateCrash"
+		desc "$$InvestigateCrash$$"
+	}
+}
+
+
+//==============================================================================
+// MISSION 7 LEVEL 3
+//==============================================================================
+
+//================================================
+// SUB LEVEL m7l3-attrexian_colony
+//================================================
+m7l3-attrexian_colony
+{
+	objective
+	{
+		name "ShuttleRendezvous"
+		desc "$$ShuttleRendezvous$$"
+	}
+}
+
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 8
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 8 LEVEL 1
+//==============================================================================
+
+//================================================
+// SUB LEVEL m8l1a-drull_ruins2
+//================================================
+m8l1-drull_ruins2
+{
+	objective
+	{
+		name "FindEntrance"
+		desc "$$FindEntrance$$"
+	}
+
+}
+
+
+//================================================
+// SUB LEVEL m8l1b-drull_ruins2
+//================================================
+
+
+//==============================================================================
+// MISSION 8 LEVEL 2
+//==============================================================================
+
+
+
+//================================================
+// SUB LEVEL m8l2a-drull_ruins2
+//================================================
+m8l2-drull_ruins2
+{
+	objective
+	{
+		name "ProtectKrindo"
+		desc "$$ProtectKrindo$$"
+	}
+}
+
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 9
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 9 LEVEL 1
+//==============================================================================
+
+//================================================
+// SUB LEVEL m9l1a-klingon_base
+//================================================
+
+m9l1a-klingon_base
+{
+	objective
+	{
+		name "TakeKrindo"
+		desc "$$TakeKrindotoBar$$"
+	}
+	objective
+	{
+		name "FindOmag"
+		desc "$$LocateOmag$$"
+	}
+
+	objective
+	{
+		name "FollowOmag"
+		desc "$$FollowOmag$$"
+	}
+}
+
+//================================================
+// SUB LEVEL m9l1b-klingon_base
+//================================================
+m9l1b-klingon_base
+{
+objective
+	{
+		name "FollowOmag"
+		desc "$$FollowOmag$$"
+	}
+}
+//==============================================================================
+// MISSION 9 LEVEL 2
+//==============================================================================
+
+//================================================
+// SUB LEVEL m9l2-klingon_base
+//================================================
+m9l2-klingon_base
+{
+	objective
+	{
+		name "DefeatKlingonBoss"
+		desc "$$DefeatKlingonBoss$$"
+	}
+}
+
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 10
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 10 LEVEL 1
+//==============================================================================
+
+//================================================
+// SUB LEVEL m10l1-romulan_installation
+//================================================
+
+m10l1-romulan_installation
+{
+objective
+   {
+   name "EnterBase"
+   desc "$$EnterBase$$"
+   }
+   
+objective
+   {
+   name "MeetInformant"
+   desc "$$MeetInformant$$"
+   }
+
+objective
+   {
+   name "AvoidBioScanners"
+   desc "$$AvoidBioScanners$$"
+   }
+
+objective
+   {
+   name "CreateDiversion"
+   desc "$$CreateDiversion$$"
+   }
+   
+objective
+   {
+   name "GetArea2Access"
+   desc "$$GetArea2Access$$"
+   }
+
+information
+   {
+   name "BioScan"
+   data "$$UseBioScan$$"
+   shader hud/mission_objective_taskbar
+   }
+}
+
+
+//==============================================================================
+// MISSION 10 LEVEL 2
+//==============================================================================
+
+//================================================
+// SUB LEVEL m10l2a-romulan_installation
+//================================================
+
+m10l2a-romulan_installation
+{
+objective
+   {
+   name "DownloadData"
+   desc "$$DownloadData$$"
+   }
+   
+objective
+   {
+   name "RescueGonzalez"
+   desc "$$RescueGonzalez$$"
+   }
+      
+objective
+   {
+   name "GainStorageAccess"
+   desc "$$GainStorageAccess$$"
+   }
+
+objective
+   {
+   name "FollowInformant"
+   desc "$$FollowInformant$$"
+   }
+
+objective
+   {
+   name "FindExit"
+   desc "$$FindExit$$"
+   }
+   
+information
+   {
+   name "BioScan"
+   data "$$UseBioScan$$"
+   shader hud/mission_objective_taskbar
+   }
+}
+
+//================================================
+// SUB LEVEL m10l2b-romulan_installation
+//================================================
+m10l2b-romulan_installation
+{
+objective
+   {
+   name "FollowInformant"
+   desc "$$FollowInformant$$"
+   }
+
+objective
+   {
+   name "DefeatInformant"
+   desc "$$DefeatInformant$$"
+   }
+objective
+   {
+   name "RescueGonzalez"
+   desc "$$RescueGonzalez$$"
+   }
+}
+
+
+//=========================================================================================================
+//=========================================================================================================
+//	MISSION 11
+//=========================================================================================================
+//=========================================================================================================
+
+//==============================================================================
+// MISSION 11 LEVEL 1
+//==============================================================================
+
+//================================================
+// SUB LEVEL m11l1a-drull_ruins3
+//================================================
+
+m11l1a-drull_ruins3
+{
+objective
+   {
+   name "FindEntrance"
+   desc "$$FindEntrance$$"
+   }
+   {
+   name "DefeatAlienCommander"
+   desc "$$DefeatAlienCommander$$"
+   }
+}
+
+//==============================================================================
+// MISSION 11 LEVEL 2
+//==============================================================================
+
+//================================================
+// SUB LEVEL m11l2a-drull_ruins3
+//================================================
+m11l2a-drull_ruins3
+{
+objective
+   {
+   name "StopCommander"
+   desc "$$StopCommander$$"
+   }
+}
+
+//==============================================================================
+// MISSION 11 LEVEL 3
+//==============================================================================
+
+//================================================
+// SUB LEVEL m11l3a-drull_ruins3_boss
+//================================================
+m11l3a-drull_ruins3
+{
+objective
+   {
+   name "StopCommander"
+   desc "$$StopCommander$$"
+   }
+}
+//================================================
+// SUB LEVEL m11l3b-drull_ruins3_boss
+//================================================
+m11l3b-drull_ruins3
+{
+objective
+   {
+   name "StopCommander"
+   desc "$$StopCommander$$"
+   }
+
+objective
+   {
+   name "DefeatUberMorph"
+   desc "$$DefeatUberMorph$$"
+   }
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Objectives for IGMs
+//
+//
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+IGM1
+{
+	objective
+	{
+		name "IGM1VisitArmory"
+		desc "$$IGM1VisitArmory$$"
+	}
+	objective
+	{
+		name "IGM1VisitLockers"
+		desc "$$IGM1VisitLockers$$"
+	}
+	objective
+	{
+		name "IGM1VisitBreifing"
+		desc "$$IGM1VisitBreifing$$"
+	}
+	objective
+	{
+		name "IGM1HoloDeck"
+		desc "$$IGM1HoloDeck$$"
+	}
+	objective
+	{
+		name "IGM1GoToBridge"
+		desc "$$IGM1GoToBridge$$"
+	}
+}
+
+IGM2
+{
+	objective
+	{
+		name "IGM2GoToShuttleBay"
+		desc "$$IGM2GoToShuttleBay$$"
+	}
+	objective
+	{
+		name "IGM2RepairShuttle"
+		desc "$$IGM2RepairShuttle$$"
+	}
+	objective
+	{
+		name "IGM2RetrivePlasmaInverter"
+		desc "$$IGM2RetrivePlasmaInverter$$"
+	}
+	objective
+	{
+		name "IGM2PlaceInShuttle"
+		desc "$$IGM2PlaceInShuttle$$"
+	}
+	objective
+	{
+		name "IGM2BoardShuttle"
+		desc "$$IGM2BoardShuttle$$"
+	}
+}
+
+IGM3
+{
+	objective
+	{
+		name "IGM3TalkWithPicard"
+		desc "$$IGM3TalkWithPicard$$"
+	}
+	objective
+	{
+		name "IGM3GoToLibaray"
+		desc "$$IGM3GoToLibaray$$"
+	}
+	objective
+	{
+		name "IGM3MeetInBriefingRoom"
+		desc "$$IGM3MeetInBriefingRoom$$"
+	}
+	objective
+	{
+		name "IGM3GoToTransporterRoom"
+		desc "$$IGM3GoToTransporterRoom$$"
+	}
+}
+
+IGM4
+{
+	objective
+	{
+		name "IGM4TalkWithKleeya"
+		desc "$$IGM4TalkWithKleeya$$"
+	}
+	objective
+	{
+		name "IGM4GoToBridge"
+		desc "$$IGM4GoToBridge$$"
+	}
+	objective
+	{
+		name "IGM4GoToArmory"
+		desc "$$IGM4GoToArmory$$"
+	}
+	objective
+	{
+		name "IGM4HoloDeck"
+		desc "$$IGM4HoloDeck$$"
+	}
+	objective
+	{
+		name "IGM4BridgeAgian"
+		desc "$$IGM4BridgeAgian$$"
+	}
+	objective
+	{
+		name "IGM4Transporter"
+		desc "$$IGM4Transporter$$"
+	}
+}
+
+IGM4alt
+{
+	objective
+	{
+		name "IGM4TalkWithKleeya"
+		desc "$$IGM4TalkWithKleeya$$"
+	}
+	objective
+	{
+		name "IGM4GoToTelsia"
+		desc "$$IGM4GoToTelsia$$"
+	}
+	objective
+	{
+		name "IGM4GoToBridge"
+		desc "$$IGM4GoToBridge$$"
+	}
+	objective
+	{
+		name "IGM4GoToArmory"
+		desc "$$IGM4GoToArmory$$"
+	}
+	objective
+	{
+		name "IGM4HoloDeck"
+		desc "$$IGM4HoloDeck$$"
+	}
+	objective
+	{
+		name "IGM4BridgeAgian"
+		desc "$$IGM4BridgeAgian$$"
+	}
+	objective
+	{
+		name "IGM4Transporter"
+		desc "$$IGM4Transporter$$"
+	}
+}
+
+IGM5
+{
+	information
+	{
+		name "IGM5RideShuttle"
+		data "Ride the shuttle."
+		shader hud/mission_objective_taskbar
+	}
+}
+
+IGM6
+{
+	objective
+	{
+		name "IGM6TelsiaKleeyaChoice"
+		desc "$$IGM6TelsiaKleeyaChoice$$"
+	}
+	objective
+	{
+		name "IGM6MeetKorban"
+		desc "$$IGM6MeetKorban$$"
+	}
+	objective
+	{
+		name "IGM6CompleteHoloMission"
+		desc "$$IGM6CompleteHoloMission$$"
+	}
+	objective
+	{
+		name "IGM6GoToShuttleBay"
+		desc "$$IGM6GoToShuttleBay$$"
+	}
+}
+
+IGM6alt
+{
+	objective
+	{
+		name "IGM6TelsiaKleeyaChoice"
+		desc "$$IGM6TelsiaKleeyaChoice$$"
+	}
+	objective
+	{
+		name "IGM6MeetTelsia"
+		desc "$$IGM6MeetTelsia$$"
+	}
+	objective
+	{
+		name "IGM6MeetKorban"
+		desc "$$IGM6MeetKorban$$"
+	}
+	objective
+	{
+		name "IGM6CompleteHoloMission"
+		desc "$$IGM6CompleteHoloMission$$"
+	}
+	objective
+	{
+		name "IGM6GoToShuttleBay"
+		desc "$$IGM6GoToShuttleBay$$"
+	}
+}
+
+IGM7
+{
+	objective
+	{
+		name "IGM7GoToBrig"
+		desc "$$IGM7GoToBrig$$"
+	}
+	objective
+	{
+		name "IGM7GoToArmory"
+		desc "$$IGM7GoToArmory$$"
+	}
+	objective
+	{
+		name "IGM7HoloDeck"
+		desc "$$IGM7HoloDeck$$"
+	}
+	objective
+	{
+		name "IGM7GoToBreifingRoom"
+		desc "$$IGM7GoToBreifingRoom$$"
+	}
+	objective
+	{
+		name "IGM7GoToSickBay"
+		desc "$$IGM7GoToSickBay$$"
+	}
+}
+
+IGM8
+{
+    objective
+	{
+		name "IGM8RemoveImplants"
+		desc "$$IGM8RemoveImplants$$"
+	}
+	
+	objective
+	{
+		name "IGM8MeetWithPicard"
+		desc "$$IGM8MeetWithPicard$$"
+	}
+	objective
+	{
+		name "IGM8MeetTelsiaOrKleeya"
+		desc "$$IGM8MeetTelsiaOrKleeya$$"
+	}
+	objective
+	{
+		name "IGM8GoToBreifingRoom"
+		desc "$$IGM8GoToBreifingRoom$$"
+	}
+	objective
+	{
+		name "IGM8GoToShuttleBay"
+		desc "$$IGM8GoToShuttleBay$$"
+	}
+}
+
+
+
+
+//test map
+code_test/intheway
+{
+	objective
+	{
+		name "Objective1"
+		desc "This is objective 1"
+	}
+
+	objective
+	{
+		name "Objective2"
+		desc "This is objective 2"
+	}
+
+
+	objective
+	{
+		name "Objective3"
+		desc "This is objective 3"
+	}
+
+	objective
+	{
+		name "Objective4"
+		desc "This is objective 4"
+	}
+
+	objective
+	{
+		name "Objective5"
+		desc "This is objective 5"
+	}
+
+
+	objective
+	{
+		name "Objective6"
+		desc "This is objective 6"
+	}
+
+
+	objective
+	{
+		name "Objective7"
+		desc "This is objective 7"
+	}
+
+
+	objective
+	{
+		name "Objective8"
+		desc "This is objective 8"
+	}
+
+	information
+	{
+	   name "Information1"
+	   data "This is information 1"
+	   shader hud/mission_objective_taskbar
+	}
+
+	information
+	{
+	   name "Information2"
+	   data "This is information 2"
+	   shader hud/mission_objective_taskbar
+	}
+
+	information
+	{
+	   name "Information3"
+	   data "This is information 3"
+	   shader hud/mission_objective_taskbar
+	}
+
+	information
+	{
+	   name "Information4"
+	   data "This is information 4"
+	   shader hud/mission_objective_taskbar
+	}
+}
+
+//==================================================================== localizationbox
+localizationbox
+{
+objective
+	{
+	name "TestObjective1"
+	desc "$$TestObjective1$$"
+	}
+objective
+	{
+	name "TestObjective2"
+	desc "$$TestObjective2$$"
+	}
+
+information
+   {
+   name "TestInformation1"
+   data "$$TestInformation1$$"
+   shader hud/mission_objective_taskbar
+   }
+}
+////////////////////////////////////////////////////////////////////////////////
+//City
+////////////////////////////////////////////////////////////////////////////////
+city
+{
+objective
+	{
+	name "cfindWayIn"
+	desc "$$cfindWayIn$$"
+	}
+objective
+	{
+	name "cfindWaySpy"
+	desc "$$cfindWaySpy$$"
+	}
+objective
+	{
+	name "cfindSpy"
+	desc "$$cfindSpy$$"
+	}
+objective
+	{
+	name "cstopSpy"
+	desc "$$cstopSpy$$"
+	}
+}
+city3
+{
+objective
+	{
+	name "c3findWayOut"
+	desc "$$c3findWayOut$$"
+	}
+objective
+	{
+	name "c3unlockTelsia"
+	desc "$$c3unlockTelsia$$"
+	}
+objective
+	{
+	name "c3escortTelsiaOut"
+	desc "$$c3escortTelsiaOut$$"
+	}
+}
+city4
+{
+objective
+	{
+	name "c4escortTelsiaOut"
+	desc "$$c4escortTelsiaOut$$"
+	}
+objective
+	{
+	name "c4beamTelsiaBack"
+	desc "$$c4beamTelsiaBack$$"
+	}
+objective
+	{
+	name "c4locateSpy"
+	desc "$$c4locateSpy$$"
+	}
+objective
+	{
+	name "c4avoidConflict"
+	desc "$$c4avoidConflict$$"
+	}
+objective
+	{
+	name "c4sitdownAnd"
+	desc "$$c4sitdownAnd$$"
+	}
+objective
+	{
+	name "c4followSpy"
+	desc "$$c4followSpy$$"
+	}
+objective
+	{
+	name "c4scannAreay"
+	desc "$$c4scannArea$$"
+	}
+}
+city5
+{
+objective
+	{
+	name "c5FixTrans"
+	desc "$$c5FixTrans$$"
+	}
+objective
+	{
+	name "c5AvoidDetect"
+	desc "$$c5AvoidDetect$$"
+	}
+objective
+	{
+	name "c5TryTrackSpy"
+	desc "$$c5TryTrackSpy$$"
+	}
+objective
+	{
+	name "c5RestoreLiftPower"
+	desc "$$c5RestoreLiftPower$$"
+	}
+}
+
+
+

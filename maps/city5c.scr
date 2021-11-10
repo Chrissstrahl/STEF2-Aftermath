@@ -1,0 +1,256 @@
+//City 5C By Daedalus
+//THIS LEVEL COMES AFTER CITY5B AND BEFORE CITY6
+//In this Mission Munro finds some civillians, gets attacked by a romulan shuttle and has to find a way down from the rooftops.
+//meets up with chang and korban again, and heads on to find the spy.
+
+#include "maps/global_scripts/global_common.scr" 
+#include "maps/global_scripts/global_debugUtils.scr" 
+#include "maps/global_scripts/global_tricorderBase.scr" 
+#include "maps/global_scripts/global_tricorderRoute.scr" 
+#include "maps/global_scripts/global_tricorderMod.scr" 
+#include "maps/global_scripts/global_tricorderKeypad.scr"
+
+void main()
+{
+//load objectives, then inizial
+    if(getCvarInt("g_gametype") != 1)
+    {
+        $player.loadobjectives( "city5c" );
+        wait( .1 );
+        $player.setobjectiveshow( "c5cescapetheprison", 1 );
+		$player.setobjectiveshow( "c5cfindspy", 1 );
+        $player.setobjectiveshow( "c5ctalk", 0 );
+        $player.setobjectiveshow( "c5cscanarea", 0 );
+        $player.setobjectiveshow( "c5cgetkey", 0 );
+		$player.setobjectiveshow( "c5cfixshuttle", 0 );
+        wait( .1 );
+        $player.setobjectivecomplete( "c5cescapetheprison", 1 );
+    }
+	// Entity fade dist
+	$world.entity_fade_dist( 16000 );
+	
+	//enable sky(skybox)
+	$sky.rendereffects( "+skyorigin" );
+	
+	//clear/set viewmodes avialbe for Tricorder
+	$world.clearAvailableViewModes();
+	
+	$camfront.roll( 180 );
+	//spawn camera early so its done before level starts
+	spawn("camera","targetname","cam1");	
+	spawn("camera","targetname","cam2");
+	spawn("camera","targetname","cam3");	
+	
+	wait(0.5);
+	
+//wait for the player to spawn
+	waitForPlayer();
+//clear/set viewmodes avialbe for Tricorder
+	$world.clearAvailableViewModes();
+	$world.addAvailableViewMode("tripwire");
+	$world.addAvailableViewMode("structuralintegrity");
+//give weapons from previouse level, in case player loads city5c as standalone
+	$player.give("models/weapons/worldmodel-compressionrifle.tik");
+	$player.give("models/weapons/worldmodel-sniperrifle.tik");
+	$player.give("models/weapons/worldmodel-tricorder-stx.tik");
+	$player.give("models/weapons/worldmodel-phaser-stx.tik");	
+	
+//cinematic actors off
+	$munro.hide();
+	$munro2.hide();
+	$munro.pushable(0);
+	$munro2.ai_off();
+	$munro.ai_off();
+	$munro.notsolid();
+	$chloe.ai_off();
+	$jack.ai_off();
+	$chloe.give("models/weapons/worldmodel-phaser-stx.tik");	
+	$sniper.ai_off();
+	$sniper2.ai_off();
+	$guy2.ai_off();
+	$sniper3.ai_off();
+	$girl1.anim("bar_sitting_relaxed");
+	$theguy.anim("bar_sitting_forward");
+	$guy2.anim("bar_sitting_forward");
+	
+
+	
+//setup the shuttle
+	$shuttle.bind($shuttleOrigin);
+}
+
+void surprise()
+{
+        $player.setobjectiveshow( "c5ctalk", 1 );
+		
+	//fadeout camera
+	cam_fadeout(0.25,0,0,0,1);
+	
+	//wait a moment for the camera to spawn
+	wait(0.05);
+
+//wait a moment for the camera to spawn
+	wait(1);
+	//fade in cam
+	$munro.show();
+	//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+		wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+//time 1.0002 sec 
+		wait(1.0);
+		$cam1.follow($munrocam);	
+		$cam1.cut();
+		cuecamera($cam1);
+		cam_fadeIn(0.25,0,0,0,1);
+	}
+	//munro walks thru door
+	$entrancedoor.open($world);
+	$munro.walkto("t7","walk");
+	wait(2);
+	//gets pointed gun at by the civillians
+	$chloe.anim("mercpistol_tense_idle1");
+	$jack.anim("mercshotgun_tense_idle1");	
+	$munro.headwatch($chloe);
+	wait(0.5);
+	$cam2.follow($angle2);	
+	$cam2.cut();
+	cuecamera($cam2);
+
+
+	$cam2.follow($cut2);	
+	$cam2.cut();
+	cuecamera($cam2);
+	wait(1.0);
+	$chloe.playDialog("localization/sound/dialog/m9l1/mercf2_offic.mp3",2,128,0);
+	waitforDialog($chloe);
+	$cam2.follow($angle2);	
+	$cam2.cut();
+	cuecamera($cam2);
+	//PLZ DON'T SHOOT IM WITH THE FEDERATION - Munro 
+	$munro.playDialog("localization/sound/dialog/m5l2/munro_getyouout.mp3",2,128,0);
+	waitforDialog($munro);
+	$chloe.anim("mercpistol_idle");
+	$jack.anim("mercshotgun_idle");	
+	//Ok i almost lost my arm there are exomorphs in this level
+	$jack.playDialog("localization/sound/dialog/m5l2/krindo_tookarm.mp3",2,128,0);
+	$chloe.walkto("chloenode0","walk");	
+	waitforDialog($jack);	
+	$munro.headwatch($jack);
+	//Keep yourselves alive so i can save you all
+	$munro.playDialog("localization/sound/dialog/m8l2/munro_keepalive.mp3",2,128,0);	
+	waitforDialog($munro);
+
+	//follow me so the scripted event will kill me in 2 seconds.
+	$jack.playDialog("localization/sound/dialog/m5l2/krindo_comewith.mp3",2,128,0);
+	waitforDialog($jack);	
+	wait(0.5);
+	//jack walks away from his problems
+	$jack.walkto("mercnode0","walk");
+	//fadeout camera
+	cam_fadeout(0.25,0,0,0,1);
+	wait(2.0);
+	//munro pisses off
+	$munro.remove();
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+		$player.show();
+		$player.solid();
+	}
+	cam_fadeIn(0.25,0,0,0,1);
+	$player.origin('-224 856 128');
+	//player is teleported through the door
+	$chloe.pushable(0);
+	wait(1.0);
+	$jack.walkto("mercnode7","run");
+}
+	
+void flyby()
+{
+//start the shuttle
+	$shuttleOrigin.followpath( $shuttlePath , "ignoreangles" );
+//play flyby sound for romulan shuttle
+	$shuttle.loopsound("sound/vehicles/shuttlecraft/shuttle_flyby_slow.WAV",1,512);
+	$jack.health( 10 );
+	$chloe.health( 300 );
+	$chloe.walkto("chloenode26","run");	
+	wait(1.0);
+	$jack.walkto("mercnode11","run");
+	wait(0.5);
+	$sniper.attack($jack);
+	wait(2.0);
+	$sniper2.ai_on();
+	$sniper.ai_on();
+	$sniper3.ai_on();
+}
+
+void shuttleAttacked()
+//if romulan shuttle has been attacked by the player
+{
+	wait(0.1);
+	$shuttle.loopsound("sound/ships/romulan/rom_redalert.wav",1,512);
+	wait(0.1);
+//beam in lots of romulan troops
+	float	fBeamInLoactaion;
+	float	fBeamedIn;
+	entity	eSpawn;
+	for(fBeamInLoactaion=0;fBeamInLoactaion<5;fBeamInLoactaion++)
+	{
+		fBeamedIn++;
+		eSpawn = getEntity("troopBeamLocation"+fBeamInLoactaion);
+		if(doesEntityExist(eSpawn))
+		{
+			eSpawn.spawneffectname("TransportIn","Romulan");
+			triggerEntity(eSpawn);
+		}
+		if(fBeamedIn > 3)
+		{
+			fBeamedIn=0;
+			wait(0.5);
+		}
+		
+		wait(0.05);
+	}
+	$player.missionfailed("$$caught$$");
+}
+
+void level_start()
+{
+//Hide cinematic actor
+	$munro.hide();
+	$munro.ai_off();
+}
+
+void walldooropen()
+{
+	$walldoor.unlock();
+	$walldoor.open($player);
+}
+
+void lookaround()
+{
+     $player.setobjectiveshow( "c5cscanarea", 1 );
+}
+
+void liftcode()
+{
+	//secret lift puzzle
+	globalTricorderKeypad_SetSecretCode( 2,6,8,1,3,4,0,0,0 ); 
+	globalTricorderKeypad_SetType( "romulan" ); 
+	globalTricorderKeypad_SetScannedCodeFlag(0); 
+	thread globalTricorderKeypad_Run( $doorpuzzle, 0, 3 ); 
+}
+
+void needkey()
+{
+    $player.setobjectiveshow( "c5cgetkey", 1 );
+}
+

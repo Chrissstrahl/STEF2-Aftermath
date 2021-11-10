@@ -1,0 +1,343 @@
+void main();
+void inizial();
+void cinematic_start();
+void cinematic_end();
+void city_print(string sText);
+void setupLevel();
+void objective2();
+void makeTunnelLightFlicker();
+void hideoutEnter();
+void cinematic_roof();
+void cinematic_roofEnd();
+
+void main()
+//this is executed as soon as the server has finished loading this map
+{
+	cam_fadeOut(0.01,0,0,0,1);
+	// Entity fade dist
+	$world.entity_fade_dist( 16000 );
+	
+	//enable sky(skybox)
+	$sky.rendereffects( "+skyorigin" );
+	
+	//clear/set viewmodes avialbe for Tricorder
+	$world.clearAvailableViewModes();
+
+	$camfront.roll( 180 );
+	
+//setup everything we need to be ready before cinematic starts
+	inizial();
+//start cinematic now	
+	thread cinematic_start();
+}
+
+void inizial()
+{
+//spawn camera first so it will be there by the time we need it in teh cinematic (wait at least 0.05 sec)
+	spawn("camera","targetname","cam3");//camrea will be spawned at 0 0 0 on map
+	$korban.ai_off();
+	$korban.hide();
+	$chang.ai_off();
+	$chang.hide();
+	$munro.ai_off();
+}
+
+void cinematic_start()
+{
+//time for cam to spawn
+	wait(0.05);
+//wait for the player to spawn
+	waitForPlayer();
+		/*
+//test
+	entity eCamera;
+	eCamera = spawn("camera","targetname","cam3");//camrea will be spawned at 0 0 0 on map
+	float fWhileRounds=0;
+	float fTime=0;
+	while(!doesEntityExist(eCamera))
+	{
+		wait(0.01);
+		fWhileRounds++;
+		fTime = (fTime + 0.01);
+		city_print("cam3 is not yet fully spawned");
+	}
+	city_print("Time elapsed: " + fTime + " Rounds: " + fWhileRounds);
+	*/
+	
+	//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+		$player.hide();
+		$player.notsolid();
+//time 1.0002 sec 
+		wait(0.5);
+		$cam3.fov(70);
+		$cam3.follow($stcam);//not found
+		$cam3.lookat($chang);//not found
+		$cam3.cut();//not found
+		wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+		cuecamera($cam3);//camera now ready to be accessed, now getting camera from teh location it spawned at
+	}
+//wait a moment to have the player realize what is going on
+wait(0.1);
+//fade out cam`
+	cam_fadeIn(0.25,0,0,0,1);
+//wait for the effect to end
+	wait(6);
+//beam the team in, the cinematic has 
+	$chang.notsolid();
+	$korban.notsolid();
+	$korban.displayeffect("TransportIn","Federation");
+	$korban.show();
+	$munro.displayeffect("TransportIn","Federation");
+	$chang.displayeffect("TransportIn","Federation");
+	$chang.show();
+	$chang.solid();
+	$korban.solid();
+	skipthread("cinematic_end");
+//wait 1 sec
+	wait(2);
+	$munro.playDialog("localization/sound/dialog/m7l2/munro_fullscan.mp3",2,128,0);
+	$munro.headwatch( $chang, 70 );
+	wait(2);
+	wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+	$chang.anim( "tricorder_draw" );
+	waitforanimation( $chang, "tricorder_draw" );
+	$chang.anim( "tricorder_scan180" );
+	waitForAnimation( $chang , "tricorder_scan180" );
+	$chang.anim( "tricorder_calm_idle" );
+	$chang.walkto("$changscan","walk");
+	//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		$cam3.follow($cameratopdown1);
+		$cam3.cut();
+		wait(0.1);
+		cuecamera($cam3);
+	}
+	
+	waitForAnimation( $chang , "tricorder_scan180" );
+	$chang.anim( "tricorder_calm_idle" );
+	wait(1);
+	$chang.playDialog("localization/sound/dialog/m8l1/chang_inter.mp3",2,128,0);
+	wait(4);
+	$chang.headwatch( $munro, 70 );
+	$chang.playDialog("localization/sound/dialog/m7l1/chang_getgo.mp3",2,128,0);
+	wait(1);
+	$chang.anim( "tricorder_putaway" );
+	waitforanimation( $chang, "tricorder_putaway" );
+	$chang.useactorweapon( "CompressionRifle" );
+	
+//end cinematic now
+	thread cinematic_end();
+}
+
+void cinematic_end()
+{
+//fade out cam
+	cam_fadeOut(0.25,0,0,0,1);
+	wait(0.3);
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+		$player.show();
+		$player.solid();
+	}
+	
+	$munro.remove();	
+	$korban.ai_on();
+	$chang.ai_on();	
+	$player.setobjectiveshow( "cfindWaySpy", 1 );
+//fade out cam
+	cam_fadeIn(0.25,0,0,0,1);
+}
+
+void city_print(string sText)
+//----------------------------------------------------------------------
+// Print the text, for linux servers we need echo instead
+// do not use ";", echo does not work with that!!!
+//----------------------------------------------------------------------
+{
+	sText = sText+"\n";
+//detect if this is a linux server
+	if(getCvar("version") == "Elite Force II 1.10 linux-i386 Oct 17 2003"){
+		print(sText + "\n");
+	}else{
+		stuffCMD("echo "+sText + "\n");
+	}
+}
+
+void setupLevel()
+{
+	//$world.farplane_cull( 1 );//0
+	//$world.farplane(4600);//5600,3400
+	//$world.farplane_fog(1);
+	//$world.farplane_color('0 0 0');
+//remove archetypes when targeting these models
+	$console0.archetype("");
+	$console1.archetype("");
+	$console2.archetype("");
+	$console3.archetype("");
+	$console4.archetype("");
+	$console5.archetype("");
+	$laptop.archetype("");
+	$laptopUser.archetype("");
+//spy's hideout, animate laptop to be opened - can not be set within the radiant
+	$laptop.anim("open_idle");
+//activat the dynamic light inside the tunnel
+	$world.light_intensity("tunnelDynLight1",1.00); //set light to fullbright
+}
+
+void objective2()
+{
+	$player.setobjectiveshow( "cfindWaySpy", 1 );
+	$player.setobjectivecomplete( "cfindWayIn", 1 );
+}
+
+void makeTunnelLightFlicker()
+//-> a explosion effect will occur
+//-> a baser will bust trough ceiling
+{
+//delete unbusted ceiling
+	$tunnelUnbustedCeiling.remove();
+	
+//show busted ceiling
+	$tunnelBustedCeiling.show();
+	
+//play cave in sound
+	$tunnelBustedCeiling.playsound("sound/impact/explosion/expl_rockdebr1.wav",3,3,256);
+
+//make dynamic light flicker
+	$world.light_lightstyle("tunnelDynLight1","aalzlaaalzzlalzzzzl",0);
+}
+
+void hideoutEnter()
+{
+//save game if player is still alive
+	if($player.getHealth() > 0 && $laptopUser.getHealth() > 0)
+	{
+		stuffCMD("ui_savegamewithname \"City - Roof Fight\"");
+	}
+		
+//monro says -> chnag stay behind and secure the area, while I do a chicken dance
+	$player.simplePlayDialog("localization/sound/dialog/m7l1/munro_changsecure.mp3",1,128);	
+	
+//wait for dialog
+	wait(3);
+	
+//chang says -> Yes Mam
+	$chang.playDialog("localization/sound/dialog/combat/chang_yessir9.mp3",2,128,0);
+	
+//make Chang and Korban no more follow munro on twitter
+	$korban.settendency("follow",0);
+	$chang.settendency("follow",0);
+}
+
+void laptopUserTalk()
+//make the girl at the laptop say hi
+{
+	$laptopUser.headWatch($player);
+	wait(0.2);
+	$laptopUser.playDialog("localization/sound/dialog/m2l1/cadetf1_hellosir.mp3",2,128,0);
+}
+
+void cinematic_roof()
+{
+//spawn camera entities
+	spawn("camera","targetname","cam1");
+	spawn("camera","targetname","cam2");
+	
+//fade screen black
+	cam_fadeout(0.5,0,0,0,1);
+	wait(0.5);
+	
+//start this thread when player hits escape
+	skipthread("cinematic_roofEnd");
+	
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+		$cam1.follow($roofSceneA);
+		$cam1.cut();
+		wait(0.1);
+		cuecamera($cam1);
+	}
+	
+//fade screen from black back in again to normal
+	cam_fadeIn(0.5,0,0,0,1);
+	
+//wait for cutscene
+	wait(5);
+	
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		$cam2.follow($roofSceneB);
+		$cam2.cut();
+		wait(0.1);
+		cuecamera($cam2);
+	}
+
+//wait for cutscene
+	wait(4);
+	
+//it ends here
+	thread cinematic_roofEnd();	
+}
+
+void cinematic_roofEnd()
+{
+//delete skip thread
+	skipthread("");
+	
+//terminate cinematic
+	killthread("cinematic_roof");
+	
+//fade screen black
+	cam_fadeout(0.5,0,0,0,1);
+	wait(0.5);
+
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+	}
+	
+	wait(0.5);
+	
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		releaseplayer();
+	}
+	
+//fade screen from black back in again to normal
+	cam_fadeIn(0.5,0,0,0,1);
+	
+//monro says -> oh great
+	$player.simplePlayDialog("localization/sound/dialog/m8l2/munro_cancloak.mp3",1,128);
+}
+
+
+void LevelComplete()
+//called when loevel ends
+{
+//do not show sucess hud
+	nointermission();
+}
+
+
+
+

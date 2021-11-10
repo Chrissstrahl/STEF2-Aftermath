@@ -1,0 +1,16 @@
+path sound/music/romulan
+
+normal         romulan_base1_norm.mp3
+action         rom_install2_action.mp3
+failure        romulan_endgame.mp3
+aux1         m10_suspense.mp3
+
+!aux1 volume .7
+
+!normal loop
+!normal volume .8
+
+!action loop
+!action volume .8
+
+!failure volume .8 

@@ -1,0 +1,24 @@
+menu "main" 640 480 NONE 1
+bgcolor 0 0 0 1
+borderstyle NONE
+fullscreen 1
+nomouse 1
+gamefocus 1
+
+
+showcommand "set g_gametype 0; set bot_enable 0;set sv_maxclients 1;set sv_maxspeed 300\n"
+showcommand "map city_menulevel\n"
+
+resource
+Label
+{
+	title "Loading Menu..."
+	font serpentinemedium-24
+	rect 160 305 300 46
+	fgcolor 		1 1 1 .7
+	bgcolor 		0 0 0 0
+
+	borderstyle "none"
+}
+
+end.

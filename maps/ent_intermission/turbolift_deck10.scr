@@ -1,0 +1,49 @@
+void	turbolift_deck10();
+void	turbolift_deck10_One();
+void	turbolift_deck10_Two();
+void	turbolift_deck10_Three();
+void	turbolift_deck10_Four();
+void	turbolift_deck10_Five();
+void	turbolift_deck10_Six();
+void	turbolift_deck10_Seven();
+
+
+void	turbolift_deck10()
+{
+}
+
+void	turbolift_deck10_One()
+{
+	turbolift_travelFromTo(10,1);
+}
+
+void	turbolift_deck10_Two()
+{
+	turbolift_travelFromTo(10,3);
+}
+
+void	turbolift_deck10_Three()
+{
+	turbolift_travelFromTo(10,8);
+}
+
+void	turbolift_deck10_Four()
+{
+	turbolift_travelFromTo(10,10);
+}
+
+void	turbolift_deck10_Five()
+{
+	turbolift_travelFromTo(10,16);
+}
+
+void	turbolift_deck10_Six()
+{
+	turbolift_travelFromTo(10,19);
+}
+
+void	turbolift_deck10_Seven()
+{
+	turbolift_travelFromTo(10,23);
+}
+

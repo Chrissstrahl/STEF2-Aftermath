@@ -1,0 +1,103 @@
+//Bridge
+void briefing_anims()
+{	
+	//NON HOSTILES
+	$munrobridge0.ai_off();
+	$tuvokconf.ai_off();
+	$chell.anim( "ent-library-seat-idle" );
+	$jurot.anim( "ent-library-seat-idle" );
+	$tuvokconf.anim( "ent-library-seat-idle" );
+	$tuvokconf.angle(90);
+	$picard.anim( "ent-library-seat-idle" );
+	$tuvokwalk.walkto("tuvokwalk3","walk");
+	wait(3);
+	$crewman1.anim( "cin-m6l0-bridge-A-maleD" );
+	$crewman2.anim( "cin-m6l0-bridge-A-maleD" );
+	$tuvokwalk.remove();
+}
+
+void debriefing_start()
+{	
+	//fade out cam
+	cam_fadeOut(0.25,0,0,0,1);
+
+//wait a moment for the camera to spawn
+	wait(0.05);
+
+//wait a moment for the camera to spawn
+	wait(1);
+	
+//fade in cam
+	$munrobridge0.show();
+	$munrobridge0.animateonce("ent-seta_sit-down");
+	waitforanimation($munro,"ent-seta_sit-down");
+	$munrobridge0.anim( "ent-library-seat-idle" );
+	$munrobridge0.angle(180);
+	wait(0.5);
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+//time 1.0002 sec 
+		wait(1.0);
+		cam_fadeIn(0.25,0,0,0,1);
+		$cam2.follow($briefingcam0);//not found
+		$cam2.lookat($picard);//not found
+		$cam2.cut();//not found
+		wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+		cuecamera($cam2);//camera now ready to be accessed, now getting camera from teh location it spawned at
+	}
+	
+	//allow player to skip cinematic now, since the cinamatic is now  fully inizialized and can be skipped without causing any issues
+	skipthread("debriefing_end");
+	wait(5);
+
+	centerprint("$$Well Done Lt. Munro at catching the romulan informant and preventing further leaking of federation information.$$");
+	wait(10);	
+	centerprint("$$We traced the warp signature of the Tal Shiar agent to an asteroid base on the edge of romulan space.$$");
+	wait(5);
+	//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		$cam2.follow($briefingcam2);
+		$cam2.cut();
+		wait(0.1);
+		cuecamera($cam2);
+	}
+	
+	centerprint("$$You will take a shuttle on with .$$");
+	wait(26);
+
+	//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		$cam3.follow($briefingcam3);
+		$cam3.cut();
+		wait(0.1);
+		cuecamera($cam3);
+		$chell.playDialog("localization/sound/dialog/ent_m8/chell_temporal.mp3",2,128,0); //custom line 2	
+		wait(10);
+		$cam2.follow($briefingcam2);
+		$cam2.cut();
+		cuecamera($cam2);
+		$cam3.follow($briefingcam3);
+		$cam3.cut();
+		cuecamera($cam3);
+		$cam4.cut();
+		$cam4.follow($briefingcam4);
+		cuecamera($cam4);
+	}
+	//allow player to skip cinematic now, since the cinamatic is now  fully inizialized and can be skipped without causing any issues
+	skipthread("debriefing_end");
+	$tuvokconf.playDialog("localization/sound/dialog/ent_m2/tuvok_inforec.mp3",2,128,0); //custom line 1
+	waitForDialog( $tuvokconf );
+	wait(2);
+	
+	$munrobridge0.playDialog("localization/sound/dialog/ent_m2/munro_thanksir3.mp3",2,128,0); //custom line 1
+	waitForDialog( $munrobridge0 );
+
+	$picard.playDialog("localization/sound/dialog/ent_m8/picard_bestcase.mp3",2,128,0); //last line of cinematic
+	wait(10);
+}

@@ -1,0 +1,485 @@
+void main();
+void inizial();
+void cinematic_start();
+void cinematic_end();
+void actor_weaponPutaway(entity eActor);
+
+void main()
+{
+	cam_fadeOut(0.01,0,0,0,1);
+//clear/set viewmodes avialbe for Tricorder
+	$world.clearAvailableViewModes();
+	$world.addAvailableViewMode("structuralintegrity");
+//setup everything we need to be ready before cinamtic starts
+	inizial();
+//start cinematic now	
+	thread cinematic_start();
+}
+void inizial()
+{
+//give turbolift trigger a thread
+//- this way we don't have to recompile map if we change something there
+	$deck8_turboLift1_trigger.thread("");
+	
+//make transporter guy appear to work
+	$transporterGuy.ai_off();
+	$transporterGuy.pushable(0);
+	$transporterGuy.mass(999999);
+	$transporterGuy.anim("ent-curvedconsole-gesture2");
+	
+//remove weapon from munro
+	thread actor_weaponPutaway($munro0);
+	
+//make 
+	$korban0.ai_off();
+	$korban0.hide();
+	$player.give("models/weapons/worldmodel-tricorder-stx.tik");	
+	$chang0.ai_off();
+	$chang0.hide();
+	$alison.ai_off();
+	$alison.pushable( 0 );
+	$johnson.ai_off();
+	$johnson.pushable( 0 );
+	$kretar.ai_off();	
+	$femdoctor.ai_off();
+	$male5.ai_off();
+	$kretar.pushable( 0 );
+	$munro0.ai_off();	
+	$munro0.hide();
+	$munro0.notsolid();
+	
+//spawn camera first so it will be there by the time we need it in teh cinematic (wait at least 0.05 sec
+	spawn("camera","targetname","cam1");
+	
+		// Entity fade dist
+	$sky.rendereffects( "+skyorigin" );
+	
+	$world.entity_fade_dist( 16000 );
+	
+	$camfront.roll( 180 );
+}
+
+void crew()
+{
+	$kretar.walkto("$kretarnode1","walk");	
+//set up conversations
+	$alison.PlayDialog( "localization/sound/dialog/ent_m3/alison_justtell.mp3", 2, 128 );	
+	wait(5);
+	$johnson.PlayDialog( "localization/sound/dialog/ent_m2/johnson_busy1.mp3", 2, 128 );	
+	wait(2);	
+	$alison.PlayDialog( "localization/sound/dialog/ent_m3/alison_special.mp3", 2, 128 );	
+	wait(3);
+	$johnson.PlayDialog( "localization/sound/dialog/ent_m3/crewm_itwasnt.mp3", 2, 128 );	
+	wait(3);
+}
+
+	
+void turboLiftLeave()
+{
+	$deck8_turboLift0_door.close();
+	wait( 2 );
+	$player.stoploopsound();
+	$player.playsound( "sound/ships/enterprise/ent_turbolift_run.wav", 3, .5, 10000);
+	wait( 2.5 );
+	$player.loopsound( "sound/ships/enterprise/ent_turbolift_runloop.wav", .5, 100000 );
+	wait( 2 );
+	$player.stoploopsound();
+}
+
+void cinematic_start()
+{
+//wait a moment for the camera to spawn
+	wait(0.05);
+//wait for player to spawn(sp) or for any player to join the server (mp)
+	waitforplayer();
+
+
+	
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+		$player.hide();
+		$player.notsolid();
+		
+//wait for the player to settle in
+		wait(2);
+		
+		$cam1.follow($t1562);
+		$cam1.lookat($chang0);
+		$cam1.cut();//not found
+		
+	//make camera zoom in
+		$cam1.fov(70);
+		
+		wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+		cuecamera($cam1);//camera now ready to be accessed, now getting camera from teh location it spawned at
+	}
+	
+//wait for the camera to move in to position
+	wait(0.1);
+	
+//fade in cam
+	cam_fadeIn(0.25,0,0,0,1);
+
+//wait for the screen to fade in a bit
+	wait(0.1);
+	
+//allow player to skip cinematic now, since the cinamatic is now fully inizialized and can be skipped without causing any issues
+	skipthread("cinematic_end");
+	
+	$munro0.displayeffect("TransportIn","Federation");
+	$munro0.show();
+	$korban0.displayeffect("TransportIn","Federation");
+	$chang0.displayeffect("TransportIn","Federation");
+	$chang0.show();
+	$korban0.show();
+	wait(2);
+
+	//$korban0.headwatch( $munro0, 70 ); //makes him turn, that looks stupid
+	$munro0.headwatch( $chang0, 70 );
+	wait(0.2);
+	
+	$korban0.headwatchtarget( "none", 70 );
+	$korban0.walkto("$walkofftransporterroom0","walk");
+	$korban0.resethead(70);
+	
+	$chang0.headwatch( $munro0, 70 );
+	wait(0.15);
+	$munro0.headwatch( $korban0, 70 );
+	
+	//$chang0.walkto("$walkofftransporterroom0","walk");
+	//make chang follow korban
+	//this way korban can not block the path to the node,
+	//and they both go smoothly where they are suppose to go to
+	//as long as chang does not catchup to korban, he will keep following him
+	$chang0.walkto("$korban0","walk");
+	$chang0.headwatchtarget( "none", 70 );
+	$chang0.resethead(70);	
+	
+	wait(2);
+	
+	//play dialog, dialog can only be played on actor
+	//if you want to play a dialog without headhud and not on a actor
+	//like playing it on a $player or any other entity than a actor, you need to use
+	//simpleplaydialog
+	//
+	//Plays a dialog without all the special features the actors' have.
+	//$player.simplePlayDialog( "", 2, 128 );
+	//
+	//.playDialog("localization/sound/dialog/ent_m1/picard_munro.mp3",2,128,0); //only works on actors!
+	$player.simplePlayDialog( "localization/sound/dialog/ent_m1/picard_munro.mp3", 2, 128 );
+	wait(0.15);
+	
+	//make camera zoom in
+	$cam1.fov(30);
+	
+	//reset munro head now, seams more alive that way
+	$munro0.headwatchtarget( "none", 70 );	
+	$munro0.resethead(70);
+	
+	wait(1.7);
+	
+	//make munro seam to respond via bodylanguage
+	$munro0.animateonce("conv-affirmative");
+	
+	wait(2.5);
+	
+//end cinematic now
+	thread cinematic_end();
+}
+
+void cinematic_end()
+{
+//fade out cam
+	cam_fadeOut(1,0,0,0,1);
+	wait(1.1);
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+		$player.show();
+		$player.solid();
+	}
+
+	$munro0.remove();
+	$korban0.remove();
+	$chang0.remove();	
+	cam_fadeIn(0.25,0,0,0,1);
+}
+
+void sickbay()
+{
+	$wezley.ai_off();
+	$male5.anim( "ent-sickbed-laying-gesture" );
+	$femdoctor.walkto("sickbaynode1","walk");
+	wait(5);
+	$femdoctor.walkto("sickbaynode2","walk");
+	$femdoctor.headWatch($male5);
+	$femdoctor.anim( "tricorder_draw" );
+	wait(1);
+	waitforanimation( $femdoctor, "tricorder_draw ");
+	$femdoctor.anim( "tricorder_fire" );
+	wait(1);
+	$femdoctor.PlayDialog( "localization/sound/dialog/ent_m1/doctor_microcell.mp3", 2, 128 );
+	wait(5);
+	$femdoctor.headWatch($wezley);
+	$femdoctor.PlayDialog( "localization/sound/dialog/ent_m1/doctor_prephypo.mp3", 2, 128 );
+	wait(2);
+	$wezley.walkto("sickbaynode4","walk");
+	$wezley.headWatch($male5);
+	$wezley.anim( "tricorder_draw" );
+	waitforanimation( $wezley, "tricorder_draw ");
+	$wezley.anim( "tricorder_fire" );
+	$femdoctor.walkto("sickbaynode3","walk");
+	wait(2);
+	$femdoctor.settendency("patrol",1);
+	$femdoctor.onUse("doctorOnUse");
+}
+
+void doctorOnUse()
+{
+	killthread ("sickbay");
+	$femdoctor.headWatch($player);
+	$femdoctor.PlayDialog( "localization/sound/dialog/ent_m1/doctor_stat.mp3", 2, 128 );
+	wait(0.5);
+	$femdoctor.anim( "tricorder_fire" );
+	wait(2);
+//get healed by doctor
+	$player.simplePlayDialog( "localization/sound/dialog/combat/munro_Oooo.mp3", 2, 128 );
+	wait(2);	
+	$femdoctor.settendency("patrol",1);
+}
+
+void armoury()
+{
+	$korbanstarfleet.headWatch($player);
+	$korbanstarfleet.PlayDialog( "localization/sound/dialog/ent_m1/korban_toassist.mp3", 2, 128 );
+}
+
+void brig()
+{
+	$omag.PlayDialog( "localization/sound/dialog/ent_m7/omag_escape.mp3", 2, 128 );
+	wait(4);
+	$dorchevbrig.animateonce("conv-laugh1");
+	waitforanimation($dorchevbrig,"conv-laugh1",0.1);
+	$dorchevbrig.walkto("outofbrig","walk");
+}
+
+void briefing_anims()
+{
+
+	//spawn cam
+	spawn("camera","targetname","cam2");
+	spawn("camera","targetname","cam3");	
+	spawn("camera","targetname","cam4");	
+	spawn("camera","targetname","cam5");	
+	//NON HOSTILES
+	$munrobridge0.ai_off();
+	$tuvokconf.ai_off();
+	$chell.anim( "ent-library-seat-idle" );
+	$jurot.anim( "ent-library-seat-idle" );
+	$tuvokconf.anim( "ent-library-seat-idle" );
+	$tuvokconf.angle(90);
+	$picard.anim( "ent-library-seat-idle" );
+	$tuvokwalk.walkto("tuvokwalk3","walk");
+	wait(3);
+	$crewman1.anim( "cin-m6l0-bridge-A-maleD" );
+	$crewman2.anim( "cin-m6l0-bridge-A-maleD" );
+	$tuvokwalk.remove();
+}
+
+void debriefing_start()
+{	
+	//fade out cam
+	cam_fadeOut(0.25,0,0,0,1);
+
+//wait a moment for the camera to spawn
+	wait(0.05);
+
+//wait a moment for the camera to spawn
+	wait(1);
+	
+//fade in cam
+	$munrobridge0.show();
+	$munrobridge0.animateonce("ent-seta_sit-down");
+	waitforanimation($munro,"ent-seta_sit-down");
+	$munrobridge0.anim( "ent-library-seat-idle" );
+	$munrobridge0.angle(180);
+	wait(0.5);
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		cinematic();
+		freezeplayer();
+		letterbox(0.1);
+//time 1.0002 sec 
+		wait(1.0);
+		cam_fadeIn(0.25,0,0,0,1);
+		$cam2.follow($briefingcam0);//not found
+		$cam2.lookat($picard);//not found
+		$cam2.cut();//not found
+		wait(0.1);//cam is ready after 0.05, after these 0.1 it will be accessible
+		cuecamera($cam2);//camera now ready to be accessed, now getting camera from teh location it spawned at
+	}
+	
+	//allow player to skip cinematic now, since the cinamatic is now  fully inizialized and can be skipped without causing any issues
+	skipthread("debriefing_end");
+	wait(5);
+	$picard.playDialog("localization/sound/dialog/ent_m7/picard_forged.mp3",2,128,0); //custom line 1
+	waitForDialog( $picard );
+	
+	//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		$cam2.follow($briefingcam2);
+		$cam2.cut();
+		wait(0.1);
+		cuecamera($cam2);
+	}
+	
+	$tuvokconf.playDialog("localization/sound/dialog/ent_m8/tuvok_neutralize.mp3",2,128,0); //custom line 2
+	waitForDialog( $tuvok );
+	wait(26);
+
+	//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		$cam3.follow($briefingcam3);
+		$cam3.cut();
+		wait(0.1);
+		cuecamera($cam3);
+		$chell.playDialog("localization/sound/dialog/ent_m8/chell_temporal.mp3",2,128,0); //custom line 2	
+		wait(10);
+		$cam2.follow($briefingcam2);
+		$cam2.cut();
+		cuecamera($cam2);
+		$cam3.follow($briefingcam3);
+		$cam3.cut();
+		cuecamera($cam3);
+		$cam4.cut();
+		$cam4.follow($briefingcam4);
+		cuecamera($cam4);
+	}
+	//allow player to skip cinematic now, since the cinamatic is now  fully inizialized and can be skipped without causing any issues
+	skipthread("debriefing_end");
+	$tuvokconf.playDialog("localization/sound/dialog/ent_m2/tuvok_inforec.mp3",2,128,0); //custom line 1
+	waitForDialog( $tuvokconf );
+	wait(2);
+	
+	$munrobridge0.playDialog("localization/sound/dialog/ent_m2/munro_thanksir3.mp3",2,128,0); //custom line 1
+	waitForDialog( $munrobridge0 );
+
+	$picard.playDialog("localization/sound/dialog/ent_m8/picard_bestcase.mp3",2,128,0); //last line of cinematic
+	wait(10);
+}
+
+void debriefing_end()
+{
+		//fade out cam
+	cam_fadeOut(0.25,0,0,0,1);
+	$munrobridge0.remove();
+	$jurot.remove();
+	$tuvokconf.remove();
+	$chell.remove();	
+	$picard.remove();
+	wait(0.3);
+//do cinematic commands only in singleplayer
+	if(getCvarInt("g_gametype") != 1)
+	{
+		noncinematic();
+		clearletterbox(0.1);
+		cueplayer();
+		releaseplayer();
+		$player.show();
+		$player.solid();
+	}
+	cam_fadeIn(0.25,0,0,0,1);
+	//make telsia available
+	$player.simplePlayDialog( "localization/sound/dialog/ent_m4/telsia_seeyou2.mp3", 2, 128 );
+	$telsiadoor.triggerable();
+	killthread("debriefing_start");
+}
+
+//
+void telsia()
+{
+	$crewQuarter0_door.unlock();
+	$telsia0.walkto("telsianode1","walk");
+//wait a moment for the camera to spawn
+	$telsia0.pushable( 0 );
+	wait(1);		
+	$player.simplePlayDialog( "localization/sound/dialog/m11l3/munro_seeyou.mp3", 2, 128 );
+	wait(1.0);
+	$telsia0.playDialog("localization/sound/dialog/m11l3/telsia_himunro3.mp3",2,128,0); //second line of cinematic
+	wait(1.0);
+	$telsia0.playDialog("localization/sound/dialog/ent_m4/telsia_timetog.mp3",2,128,0); //second line of cinematic
+	wait(1.0);
+	$player.simplePlayDialog( "localization/sound/dialog/ent_m8/munro_yeah.mp3", 2, 128 );
+	$telsia0.walkto("telsianode3","walk");
+	$telsia0.headwatch( $player, 70 );
+	wait(2);
+	centerprint("$$Feel free to walk around Telsia's Quarters. Interact with her when ready$$");
+	$telsia0.onUse("telsiaOnUse");
+	
+	//give player some time to look around.  if player does not interact with telsia it triggers next thread
+	wait(20);
+	$telsia0.PlayDialog("localization/sound/dialog/m11l3/telsia_dinner.mp3", 2, 128 );	
+	wait(1.5);
+	$player.simplePlayDialog("localization/sound/dialog/m11l3/munro_accept.mp3", 2, 128 );	
+	wait(1.5);
+	$player.simplePlayDialog( "localization/sound/dialog/m7l1/munro_letsgo2.mp3", 2, 128 );
+	wait(0.5);	
+	$telsia0.walkto("telsianode4","walk");
+}
+
+void telsiaOnUse()
+{
+//Make him tell munro to use the console
+	killthread("telsia");
+	$player.simplePlayDialog( "localization/sound/dialog/m11l3/munro_ready.mp3", 2, 128 );
+	wait(2);
+	$telsia0.playDialog("localization/sound/dialog/combat/telsia_yeah9.mp3",2,128,0); //second line of cinematic
+	wait(0.5);
+	$player.simplePlayDialog( "localization/sound/dialog/m7l1/munro_letsgo2.mp3", 2, 128 );
+	wait(0.5);	
+	$telsia0.walkto("telsianode4","walk");
+	$telsia0.nouse();
+}
+
+void telsia_dinner()
+{
+	$telsia0.angle(360);
+	$telsia0.anim( "bar_sitting_relaxed" );
+}
+
+void replicatedFood()
+{
+	$replicatedFoodTrigger.playsound("sound/ships/enterprise/ent_replicator.wav",3,2,64);
+	wait(1);
+	$replicatedFoodTrigger.triggerable();
+}
+
+void actor_weaponPutaway(entity eActor)
+{
+	//if actor does not exist or actor is dead, abbort
+	if(!doesEntityExist(eActor) || eActor.getHealth() <= 0 ) {
+		return;
+	}
+	
+	string sActiveWeapon,sAnimname;
+	sActiveWeapon = eActor.getActiveWeaponName();
+	eActor.useActorWeapon(sActiveWeapon);
+	sAnimname = sActiveWeapon+"_putaway";
+	eActor.anim( sAnimname );
+	waitforanimation(eActor,sAnimname);
+	eActor.anim("Idle");
+	eActor.useActorWeapon("none");
+}
+
+
